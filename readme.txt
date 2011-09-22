@@ -4,13 +4,7 @@ Donate link: http://www.plista.com
 Contributors: plista.com
 Requires at least: 2.5.0
 Tested up to: 3.1.2
-Stable tag: 1.0
-
-== Update hint ==
-
-Dieses Plug-in wurde an sie exklusiv ausgeliefert und ist somit zur Zeit noch nicht im Wordpress Plugin directory hinterlegt. Eine automatische Update Funktion ist somit nicht verfügbar.
-
-Sobald eine neue Version verfügbar ist bzw. die finale Version im Wordpress Plugin directory hinterlegt wurde, werden Sie umgehend per E-Mail benachrichtigt.
+Stable tag: 1.1
 
 == Description ==
 
@@ -41,10 +35,11 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 5. Unter dem Feld "Installiere ein Plugin aus einem Zip-Archiv" auf "Durchsuchen" bzw. "Datei auswählen" klicken.
 6. Wählen Sie die plista Zip-Datei aus (unentpackt), die Sie im ersten Schritt auf Ihren Desktop gespeichert haben
 7. "Installieren" klicken und einen Moment warten, bis das Plugin auf den Server übertragen wird.
-8. Aktivieren Sie das plugin
-9. Unter Einstellungen finden Sie den Punkt plista, hier müssen Sie unbedingt noch den "Name des Widgets" und die "URL des Widgets" angeben. (Diese erhalten Sie unter https://www.plista.com/publishers/dashboard unter dem Punkt "Angelegte Domains" bei Klick auf "Code")
-10. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen <?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>
-11. Plista ist jetzt aktiv und kann genutzt werden
+8. Aktivieren Sie das plugin.
+9. Registrieren Sie sich unter www.plista.com/publisher_registrations um das Widget nutzen zu können.
+10. Unter Einstellungen finden Sie den Punkt plista, hier müssen Sie unbedingt noch den "Name des Widgets" und die "URL des Widgets" angeben. (Diese erhalten Sie unter https://www.plista.com/publishers/dashboard unter dem Punkt "Angelegte Domains" bei Klick auf "Code")
+11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen <?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>
+12. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
 1. Woher bekomme ich den "Namen des Widgets" und die "URL des Widgets" welche ich unter Einstellungen angeben muss?
@@ -64,9 +59,9 @@ Zurzeit ist kein Upgrade notwendig
 
 == Screenshots ==
 
-Screenhosts werden in Kürze erhältlich sein	
+Screenshots werden in Kürze erhältlich sein	
 
 == Changelog ==
 
-1.0 @ 09-22-2011 6:00 pm
+1.0 @ 09-22-2011
 	* first official release
