@@ -91,7 +91,7 @@
 		<input type="hidden" name="plista_hidden" value="P">
 		<h4>Bitte beachten Sie die Hinweise in der <a target="_blank" href="http://www.plista.com/plugins/wordpress/readme.txt">readme.txt</a> und in unserer <a href="http://wiki.plista.com/Publisher/FAQ">Wiki</a>.</h4>
 		<h3>plista Grundeinstellungen</h3>
-		<p>Falls Ihnen die folgenden Daten nicht bekannt sind, helfen wir Ihnen gern weiter. Sie erreichen uns per E-Mail unter <a href="mailto:wordpress@plista.com">wordpress@plista.com</a>.</p>
+		<p>Sie müssen Sich erst kurz <a href="https://www.plista.com/publisher_registrations/domain">hier</a> für plista registrieren um die erforderlichen Daten zu erhalten.</p>
 		<p>
 			<label style="width: 230px; display: block; float: left" for="plista_widgetname">Name des Widgets:</label>
 			<input required type="text" name="plista_widgetname" value="<?php echo $a['widgetname']; ?>" size="50">
@@ -99,7 +99,7 @@
 		</p>
 		
 		<p>
-			<label style="width: 230px; display: block; float: left" for="plista_publickey">Path:</label>
+			<label style="width: 230px; display: block; float: left" for="plista_publickey">URL des Widgets:</label>
 			<input required type="text" name="plista_publickey" value="<?php echo $a['publickey']; ?>" size="50">
 			<span>Beispiel: http://static.plista.com/fullplista/a76212beafd7d95aa47fd245.js</span>
 		</p>	

@@ -6,8 +6,6 @@ Requires at least: 2.5.0
 Tested up to: 3.1.2
 Stable tag: 1.0
 
-Enables the plista.com-service for your blog.
-
 == Update hint ==
 
 Dieses Plug-in wurde an sie exklusiv ausgeliefert und ist somit zur Zeit noch nicht im Wordpress Plugin directory hinterlegt. Eine automatische Update Funktion ist somit nicht verfügbar.
@@ -18,12 +16,12 @@ Sobald eine neue Version verfügbar ist bzw. die finale Version im Wordpress Plu
 
 Ihre Vorteile auf einen Blick:
 
-    * Erstes Werbeformat mit Besucher-Mehrwert
-    * Traffic und gleichzeitig Umsätze erhšhen
-    * Verweildauer Ihrer Besucher erhšhen
-    * CTR zwischen 7%-11%
-    * Kostenlose und einfache Registrierung
-    * Keine Vertragslaufzeit
+- Erstes Werbeformat mit Besucher-Mehrwert
+- Traffic und gleichzeitig Umsätze erhšhen
+- Verweildauer Ihrer Besucher erhšhen
+- CTR zwischen 7%-11%
+- Kostenlose und einfache Registrierung
+- Keine Vertragslaufzeit
 
 Das neue präferenzbasierte plista Werbeformat bietet Publishern eine innovative Lösung, um Ihre Internetseite und Produkte effizienter zu vermarkten. 
 Mit unserem Werbeformat zeigen Sie Ihren Besuchern nutzerindividuellen Inhalt in einem relevanten Kontext. 
@@ -36,7 +34,7 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 
 == Installation == 
 
-1. Speichern Sie die datei plista.zip (welche Sie am Ende der Registrierung heruntergeladen haben) auf Ihren Desktop. 
+1. Speichern Sie die das plist plugin auf Ihren Desktop.
 2. Loggen Sie sich mit Ihren Zugangsdaten in den Wordpress Administrationsbereich ein.
 3. Wählen Sie das Menü "Plugin" aus.
 4. Wählen Sie den Untermenü-Punkt "Installieren" aus.
@@ -49,13 +47,20 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 11. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
-1. Warum wird bei mir keine Werbung angezeigt?
+1. Woher bekomme ich den "Namen des Widgets" und die "URL des Widgets" welche ich unter Einstellungen angeben muss?
+Diese bekommen Sie am Ende der Registrierung auf www.plista.com/publisher_registrations
+
+2. Warum wird bei mir keine Werbung angezeigt?
 Werbung wird erst freigeschaltet sobald einige Artikel von Ihnen bei uns eingegangen sind, spätestens jedoch nach 24 Stunden.
 
-2. Es wird die Meldung "plista wurde erfolgreich installiert" angezeigt?
+3. Es wird die Meldung "plista wurde erfolgreich installiert" angezeigt?
 Diese Meldung verschwindet automatisch nachdem ca. 10 Artikel von Ihnen bei uns eingetroffen sind.
 
 Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
+
+== Upgrade Notice ==
+
+Zurzeit ist kein Upgrade notwendig
 
 == Screenshots ==
 
