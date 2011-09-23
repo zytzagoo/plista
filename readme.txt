@@ -55,7 +55,7 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-Zurzeit ist kein Upgrade notwendig
+Bitte updaten Sie auf die Version 1.1
 
 == Screenshots ==
 
@@ -65,3 +65,6 @@ Screenshots werden in Kürze erhältlich sein
 
 1.0 @ 09-22-2011
 	* first official release
+
+1.1 @ 09-21-2011
+	* major relase
