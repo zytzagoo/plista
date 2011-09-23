@@ -92,7 +92,7 @@
 					!is_archive() &&
 					!is_search()) {
 
-					return '<!-- plista wp Version 0.4.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
+					return '<!-- plista wp Version 1.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
 					<script type="text/javascript" src="'.$jspath.'"></script>
 					<script type="text/javascript">
 						/* <![CDATA[ */
