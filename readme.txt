@@ -3,7 +3,7 @@ Tags: advertising, recommendations, plista, similar items, ads, related articles
 Donate link: http://www.plista.com
 Contributors: plista.com
 Requires at least: 2.5.0
-Tested up to: 3.1.2
+Tested up to: 3.2.1
 Stable tag: 1.1
 
 == Description ==
@@ -13,7 +13,6 @@ Ihre Vorteile auf einen Blick:
 - Erstes Werbeformat mit Besucher-Mehrwert
 - Traffic und gleichzeitig Umsätze erhöhen
 - Verweildauer Ihrer Besucher erhöhen
-- CTR zwischen 7%-11%
 - Kostenlose und einfache Registrierung
 - Keine Vertragslaufzeit
 
@@ -42,13 +41,13 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 12. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
-1. Woher bekomme ich den "Namen des Widgets" und die "URL des Widgets" welche ich unter Einstellungen angeben muss?
+= Woher bekomme ich den "Namen des Widgets" und die "URL des Widgets" welche ich unter Einstellungen angeben muss? =
 Diese bekommen Sie am Ende der Registrierung auf www.plista.com/publisher_registrations
 
-2. Warum wird bei mir keine Werbung angezeigt?
+= Warum wird bei mir keine Werbung angezeigt? =
 Werbung wird erst freigeschaltet sobald einige Artikel von Ihnen bei uns eingegangen sind, spätestens jedoch nach 24 Stunden.
 
-3. Es wird die Meldung "plista wurde erfolgreich installiert" angezeigt?
+= Es wird die Meldung "plista wurde erfolgreich installiert" angezeigt? =
 Diese Meldung verschwindet automatisch nachdem ca. 10 Artikel von Ihnen bei uns eingetroffen sind.
 
 Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
@@ -59,7 +58,8 @@ Bitte updaten Sie auf die Version 1.1
 
 == Screenshots ==
 
-Screenshots werden in Kürze erhältlich sein	
+1. plista Adminpage
+2. Beispiel eines plista Widgets	
 
 == Changelog ==
 
