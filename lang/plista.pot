@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-04 10:10+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../plista_integration_admin.php:84
+msgid "Options saved."
+msgstr ""
+
+#: ../plista_integration_admin.php:111
+msgid "Your plista widget"
+msgstr ""
+
+#: ../plista_integration_admin.php:115
+msgid "plista settings"
+msgstr ""
+
+#: ../plista_integration_admin.php:116
+#, php-format
+msgid "Please pay attention to the %1$s"
+msgstr ""
+
+#: ../plista_integration_admin.php:117
+msgid "plista basic settings"
+msgstr ""
+
+#: ../plista_integration_admin.php:118
+#, php-format
+msgid "Please register at %1$s first to get all necessary data."
+msgstr ""
+
+#: ../plista_integration_admin.php:120
+msgid "Widgetname"
+msgstr ""
+
+#: ../plista_integration_admin.php:122 ../plista_integration_admin.php:128
+#: ../plista_integration_admin.php:164 ../plista_integration_admin.php:170
+#: ../plista_integration_admin.php:176 ../plista_integration_admin.php:182
+#: ../plista_integration_admin.php:188 ../plista_integration_admin.php:194
+#: ../plista_integration_admin.php:200 ../plista_integration_admin.php:206
+#: ../plista_integration_admin.php:212
+msgid "For example"
+msgstr ""
+
+#: ../plista_integration_admin.php:126
+msgid "URL"
+msgstr ""
+
+#: ../plista_integration_admin.php:132
+msgid "Widget position"
+msgstr ""
+
+#: ../plista_integration_admin.php:133
+#, php-format
+msgid ""
+"The widget will be shown automatically at the bottom of every article. Only "
+"check the option if you want to insert the widget on a different position "
+"like the sidebar. You will find more information in the %1$s"
+msgstr ""
+
+#: ../plista_integration_admin.php:136
+msgid "I would like to position the widget"
+msgstr ""
+
+#: ../plista_integration_admin.php:140
+msgid "Exclude pages"
+msgstr ""
+
+#: ../plista_integration_admin.php:144
+msgid "Don't show the widget on some pages"
+msgstr ""
+
+#: ../plista_integration_admin.php:148 ../plista_integration_admin.php:225
+msgid "Exclude the following pages"
+msgstr ""
+
+#: ../plista_integration_admin.php:150
+msgid ""
+"Insert the Page-Id's separated by comma (for example: 5, 235, 1340) where "
+"the widget should be excluded"
+msgstr ""
+
+#: ../plista_integration_admin.php:153
+msgid "plista widget design"
+msgstr ""
+
+#: ../plista_integration_admin.php:157
+msgid "I would like to change the widget design"
+msgstr ""
+
+#: ../plista_integration_admin.php:162
+msgid "Widgetheadline (font-color)"
+msgstr ""
+
+#: ../plista_integration_admin.php:168
+msgid "Widgetheadline (background-color)"
+msgstr ""
+
+#: ../plista_integration_admin.php:174
+msgid "Images (width)"
+msgstr ""
+
+#: ../plista_integration_admin.php:180
+msgid "Images (max-height)"
+msgstr ""
+
+#: ../plista_integration_admin.php:186
+msgid "Article headline (font-color)"
+msgstr ""
+
+#: ../plista_integration_admin.php:192
+msgid "Article headline (font-size)"
+msgstr ""
+
+#: ../plista_integration_admin.php:198
+msgid "Text (font-color)"
+msgstr ""
+
+#: ../plista_integration_admin.php:204
+msgid "Text (font-size)"
+msgstr ""
+
+#: ../plista_integration_admin.php:210
+msgid "Mouseover (background-color)"
+msgstr ""
+
+#: ../plista_integration_admin.php:217
+msgid ""
+"In order to use pictureAds the article images should at least have the size "
+"of 350px. For further information please contact %$1s"
+msgstr ""
+
+#: ../plista_integration_admin.php:221
+msgid "Activate plista pictureAds"
+msgstr ""
+
+#: ../plista_integration_admin.php:227
+msgid ""
+"Insert the Page-Id's separated by comma (for example: 2, 89, 520) where "
+"pictureAds should be excluded"
+msgstr ""
+
+#: ../plista_integration_admin.php:229
+msgid "For more information about finding the page id please visit"
+msgstr ""

@@ -4,9 +4,9 @@
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista Recommendations
 	Author: msch (wordpress@plista.com)
-	Version: 1.1
+	Version: 1.2
 	Author URI: http://www.plista.com
-	*y**/
+	***/
 
 	/* check php and wordpress version */
 	global $wp_version;
@@ -22,11 +22,26 @@
 		exit ($exit_msg_wp);
 	}
 
+	$plugin_path = plugin_basename( dirname( __FILE__ ) .'/lang' );
+    	load_plugin_textdomain( 'plista', '', $plugin_path );
+
 	// autoinsert widget after content or not
 	$autoinsert = get_option('plista_autoinsert');
 	if ($autoinsert != 'checked="checked"') {
 		add_filter('the_content', 'plista_integration');
 
+	}
+
+	function get_youtube_img() {
+		global $post, $posts;
+		$youtube_img = '';
+		ob_start();
+		ob_end_clean();
+		$pattern = "/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/";
+		$output = preg_match_all($pattern, $post->post_content, $matches);
+		$youtubeid = $matches [2] [0];
+		$youtube_img = 'http://img.youtube.com/vi/'.$youtubeid.'/0.jpg';
+		return $youtube_img;
 	}
 
 	// function for finding the first image in a post
@@ -35,16 +50,26 @@
 		$first_img = '';
 		ob_start();
 		ob_end_clean();
-		$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+		$pattern = "/src=[\"']?([^\"']?.*(png|jpg|gif|jpeg))[\"']?/i";
+		$output = preg_match_all($pattern, $post->post_content, $matches);
 		$first_img = $matches [1] [0];
+		
+		// add an extra check for img size cause sometimes they use ad pixels in the article
+		// ad pixels are normaly only 1px x 1px but too be sure set it to 20px x 20px
+		if ($first_img) {
+			list($width, $height, $type, $attr) = @getimagesize($first_img);
 
-		return $first_img;
+			if ($height >= '20' && $height >= '20') {
+				return $first_img;
+			} 
+		}
+		return '';
 	}
 	
 	// return the plista js
 	function plista_content($plista_data) {
 		$widgetname = get_option('plista_widgetname');  
-        $jspath = get_option('plista_jspath');
+       	$jspath = get_option('plista_jspath');
 		$hlcolor = get_option('plista_hlcolor');
 		$hlbgcolor = get_option('plista_hlbgcolor');
 		$imgsize = get_option('plista_imgsize');
@@ -59,6 +84,13 @@
 		$setblacklist = get_option('plista_setblacklist');
 		$blacklistpicads = get_option('plista_blacklistpicads');
 		$blacklistrecads = get_option('plista_blacklistrecads');
+		$categories = get_option('plista_categories');
+		$cat_ID = array();
+		$post_categories = get_the_category(); //get all categories for this post
+		foreach($post_categories as $category) {
+			array_push($cat_ID,$category->cat_ID);
+		}
+		$iscategory = is_array($categories) ? array_intersect($cat_ID, $categories) : '';
 		$plistacss || $plistapicads = '';
 		$postid = get_the_ID();
 		$ispiclist = array_search((string)$postid, explode(',', $blacklistpicads));
@@ -78,7 +110,7 @@
 
 		$plistapush = json_encode($plista_data);
 		//blacklist some pages where widget should never be shown
-		if ($isreclist === false) {
+		if ($isreclist === false && empty($iscategory)) {
 			if(strpos($_SERVER['REQUEST_URI'], '/attachment/') == false) {
 				if((is_single() || is_page()) &&
 					!is_attachment() &&
@@ -114,21 +146,26 @@
 		$text = get_the_content();
 		// filter all the bad stuff out
 		$bad = array(
-			'@<script[^>]*?>.*?</script>@si',	// Strip out javascript
-			'@<iframe[^>]*?>.*?</iframe>@si',	// Strip out iframe
-			'@<style[^>]*?>.*?</style>@siU',	// Strip style tags properly
-			'@<[\/\!]*?[^<>]*?>@si',			// Strip out HTML tags
-			'@<![\s\S]*?--[ \t\n\r]*>@'			// Strip multi-line comments including CDATA
+			'@<script[^>]*?>.*?</script>@si',	// strip out javascript
+			'@<iframe[^>]*?>.*?</iframe>@si',	// strip out iframe
+			'@<style[^>]*?>.*?</style>@siU',	// strip style tags properly
+			'@<[\/\!]*?[^<>]*?>@si',			// strip out HTML tags
+			'@<![\s\S]*?--[ \t\n\r]*>@'			// strip multi-line comments including CDATA
 		);
 		$text = strip_tags(preg_replace($bad, '', $text));
 		// strip out caption tags
 		$text = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $text );
 		$id = get_the_id();
+		$youtubepattern = "/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/";
+		$isyoutube = preg_match($youtubepattern, $post->post_content);
+
 		// first try to get the article thumbnail image
 		if ( function_exists('has_post_thumbnail') && has_post_thumbnail($id) ) {
 			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id), full );
-			$imgsrc = $thumbnail[0];
+			$imgsrc = $thumbnail[0];	
 		// if we couldn't find one, check for other images in the article
+		} else if (!empty($isyoutube)) {
+			$imgsrc = get_youtube_img();
 		} else {
 			$imgsrc = get_first_plista_image();
 		}
@@ -150,13 +187,14 @@
 		include('plista_integration_admin.php');
 	}
 
-	// only allow access to plista Admin Menu if user is Admin
+	// only allow access to plista admin Menu if user is admin
 	add_action('admin_menu', 'plista_admin_actions');
 
 	function plista_admin_actions() {
 		if( current_user_can('level_10')) {
+			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.0' );
 			add_options_page("plista", "plista", 1, "plista", "plista_admin");
-			}
+		}
 
 	}
 ?>

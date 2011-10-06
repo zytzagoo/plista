@@ -4,7 +4,8 @@ Donate link: http://www.plista.com
 Contributors: plista.com
 Requires at least: 2.5.0
 Tested up to: 3.2.1
-Stable tag: 1.1
+Stable tag: 1.2
+Text Domain: plista
 
 == Description ==
 
@@ -54,7 +55,7 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-Bitte updaten Sie auf die Version 1.1
+none
 
 == Screenshots ==
 
@@ -66,5 +67,9 @@ Bitte updaten Sie auf die Version 1.1
 1.0 @ 09-22-2011
 	* first official release
 
-1.1 @ 09-21-2011
+1.1 @ 09-23-2011
 	* major relase
+
+1.2 @ 10-05-2011
+	* better handling for img indexing
+	* english translation v1

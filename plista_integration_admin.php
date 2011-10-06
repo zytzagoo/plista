@@ -1,6 +1,9 @@
 <?php
 	if($_POST['plista_hidden'] == 'P') {
-		//Form data sent  
+
+		$categories = $_POST['plista_categories'];
+		update_option('plista_categories', $categories);
+
 		$widgetname = $_POST['plista_widgetname'];
 		update_option('plista_widgetname', $widgetname); 
 
@@ -104,139 +107,147 @@
 		$domainid = get_option('plista_domainid');
 		$blacklistpicads = get_option('plista_blacklistpicads');
 		$blacklistrecads = get_option('plista_blacklistrecads');
+		$categories = get_option('plista_categories');
+		
 	}
 ?>
 
-<div class="wrap">
-	<?php  echo "<h2>Ihr plista Widget</h2>"; ?>
+<div class="wrap plistawrapper">
+	<h2><?php _e('Your plista widget', 'plista'); ?></h2>
 
 	<form name="plista_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 		<input type="hidden" name="plista_hidden" value="P">
-		<h3>plista Grundeinstellungen</h3>
-		<h4>Bitte beachten Sie die Hinweise in der <a target="_blank" href="http://www.plista.com/plugins/wordpress/readme.txt">readme.txt</a> und in unserer <a href="http://wiki.plista.com/Publisher/FAQ">Wiki</a>.</h4>
-		<h3>plista Grundeinstellungen</h3>
-		<p>Sie müssen Sich erst kurz <a href="https://www.plista.com/publisher_registrations/domain">hier</a> für plista registrieren um die erforderlichen Daten zu erhalten.</p>
+		<h3><?php _e('plista settings', 'plista'); ?></h3>
+		<h4><?php printf(__('Please pay attention to the %1$s', 'plista'), '<a target="_blank" href="http://wordpress.org/extend/plugins/plista/installation/">Readme</a>'); ?>. </h4>
+		<h3><?php _e('plista basic settings', 'plista'); ?></h3>
+		<p><?php printf(__('Please register at %1$s first to get all necessary data.', 'plista'), '<a href="https://www.plista.com/publisher_registrations/domain">plista.com</a>'); ?></p>
 		<p>
-			<label style="width: 230px; display: block; float: left" for="plista_widgetname">Name des Widgets:</label>
+			<label class="textlabel" for="plista_widgetname"><? _e('Widgetname', 'plista'); ?></label>
 			<input type="text" name="plista_widgetname" value="<?php echo $widgetname; ?>" size="80">
-			<span>Beispiel: plista_widget_standard_1</span>
+			<span><?php _e('For example', 'plista'); ?> plista_widget_standard_1</span>
 		</p>
 
 		<p>
-			<label style="width: 230px; display: block; float: left" for="plista_jspath">URL des Widgets:</label>
+			<label class="textlabel" for="plista_jspath"><?php _e('URL', 'plista'); ?></label>
 			<input type="text" name="plista_jspath" value="<?php echo $jspath; ?>" size="80">
-			<span>Beispiel: http://static.plista.com/fullplista/46895ab564asdgsagas6546.js</span>
+			<span><?php _e('For example', 'plista'); ?> http://static.plista.com/fullplista/46895ab564asdgsagas6546.js</span>
 		</p>
 
 
-		<h3>Platzierung des plista Widgets</h3>
-		<p>Das plista Widget wird automatisch in Ihre Webseite eingefügt. Aktivieren Sie diese Funktion nur, falls Sie dies selbst übernehmen möchten. Nähere Hinweise finden Sie in der <a target="_blank" href="http://www.plista.com/plugins/wordpress/readme.txt">readme.txt</a></p>
+		<h3><?php _e('Widget position', 'plista'); ?></h3>
+		<p><?php printf(__('The widget will be shown automatically at the bottom of every article. Only check the option if you want to insert the widget on a different position like the sidebar. You will find more information in the %1$s', 'plista'), '<a target="_blank" href="http://wordpress.org/extend/plugins/plista/installation/">Readme</a>'); ?>.</p>
 		<p>
-			<input style="margin: 4px" type="checkbox" id="plista_autoinsert" name="plista_autoinsert" value="1" <?php echo $autoinsert ?>/>
-			<label  for="plista_autoinsert">Ich möchte das plista Widget selbst platzieren.</label>
+			<input type="checkbox" id="plista_autoinsert" name="plista_autoinsert" value="1" <?php echo $autoinsert ?>/>
+			<label  for="plista_autoinsert"><?php _e('I would like to position the widget', 'plista'); ?></label>
 			
 		</p>
 
-		<h3>Seiten ausschließen</h3>
-
-		<p>Bitte beachten Sie, dass Seiten ausgeschlossen werden müssen bevor die Seite bzw. das Plugin aktiv ist. Um eine Seite nachträglich zu deaktivieren kontaktieren Sie bitte <a href="mailto:wordpress@plista.com">wordpress@plista.com</a></p>
+		<h3><?php _e('Exclude pages', 'plista'); ?></h3>
 		
 		<p>
-			<input style="margin: 4px" type="checkbox" id="plista_setblacklist" name="plista_setblacklist" value="1" <?php echo $setblacklist ?>/>
-			<label for="plista_setblacklist">Seiten von plista ausschließen</label>
+			<input type="checkbox" id="plista_setblacklist" name="plista_setblacklist" value="1" <?php echo $setblacklist ?>/>
+			<label for="plista_setblacklist"><?php _e('Don\'t show the widget on some pages', 'plista'); ?></label>
 		</p>
 
 		<p>
-			<label style="width: 280px; display: block; float: left" for="plista_blacklistrecads">Seiten ausschließen</label>
+			<label class="textlabel" for="plista_blacklistrecads"><?php _e('Exclude the following pages', 'plista'); ?></label>
 			<input type="text" name="plista_blacklistrecads" value="<?php echo $blacklistrecads; ?>" size="12">
-			<span>Gebe Sie hier die Seiten-ID`s (getrennt durch Kommas zb. 12, 3, 4) ein, bei welchen plista deaktiviert werden soll.</span>
+			<span><?php _e('Insert the Page-Id\'s separated by comma (for example: 5, 235, 1340) where the widget should be excluded', 'plista'); ?>.</span>
 		</p>
 
-		<h3>Design des plista Widgets</h3>
+		<h3><?php _e('Exclude categories', 'plista'); ?></h3>
+		<ul class="plista_categories">
+		<?php 
+		$wp_categories = get_categories();
+		foreach ($wp_categories as $wp_category): ?>
+			<li>
+				<input type="checkbox" name="plista_categories[]" value="<?= $wp_category->cat_ID; ?>" <?php if (is_array($categories) && in_array($wp_category->cat_ID,$categories)) echo "checked"; ?>/>
+				<label for="plista_categories[]"><?= $wp_category->cat_name; ?></label>
+			</li>
+	  	<?php endforeach; ?>
+		</ul>
+		<h3 class="plistaclear"><?php _e('plista widget design', 'plista');?></h3>
 
 		<p>
-			<input style="margin: 4px" type="checkbox" id="plista_editcss" name="plista_editcss" value="1" <?php echo $editcss ?>/>
-			<label for="plista_editcss">Ich möchte die Farben und Maße des plista Widgets anpassen.</label>
+			<input type="checkbox" id="plista_editcss" name="plista_editcss" value="1" <?php echo $editcss ?>/>
+			<label for="plista_editcss"><?php _e('I would like to change the widget design', 'plista'); ?></label>
 		</p>
 
 		<div id="plistadesignbox">
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_hlcolor">Titel des Widgets (Schriftfarbe)</label>
+				<label class="textlabel" for="plista_hlcolor"><?php _e('Widgetheadline (font-color)', 'plista'); ?></label>
 				<input type="text" name="plista_hlcolor" value="<?php echo $hlcolor; ?>" size="12">
-				<span>z.B. #000000</span>
+				<span><?php _e('For example', 'plista'); ?> #000000</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_hlbgcolor">Titel des Widgets (Hintergrundfarbe)</label>
+				<label class="textlabel" for="plista_hlbgcolor"><?php _e('Widgetheadline (background-color)', 'plista'); ?></label>
 				<input type="text" name="plista_hlbgcolor" value="<?php echo $hlbgcolor; ?>" size="12">
-				<span>z.B. #000000</span>
+				<span><?php _e('For example', 'plista'); ?> #000000</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_imgsize">Vorschaubilder (Breite)</label>
+				<label class="textlabel" for="plista_imgsize"><?php _e('Images (width)', 'plista'); ?></label>
 				<input type="text" name="plista_imgsize" value="<?php echo $imgsize; ?>" size="12">
-				<span>z.B. 70px</span>
+				<span><?php _e('For example', 'plista'); ?> 70px</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_imgheight">Vorschaubilder (Max. Höhe)</label>
+				<label class="textlabel" for="plista_imgheight"><?php _e('Images (max-height)', 'plista'); ?></label>
 				<input type="text" name="plista_imgheight" value="<?php echo $imgheight; ?>" size="12">
-				<span>z.B. 70px</span>
+				<span><?php _e('For example', 'plista'); ?> 70px</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_ttlcolor">Artikelüberschrift (Schriftfarbe)</label>
+				<label class="textlabel" for="plista_ttlcolor"><?php _e('Article headline (font-color)', 'plista'); ?></label>
 				<input type="text" name="plista_ttlcolor" value="<?php echo $ttlcolor; ?>" size="12">
-				<span>z.B. #000000</span>
+				<span><?php _e('For example', 'plista'); ?> #000000</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_ttlsize">Artikelüberschrift (Schriftgröße)</label>
+				<label class="textlabel" for="plista_ttlsize"><?php _e('Article headline (font-size)', 'plista'); ?></label>
 				<input type="text" name="plista_ttlsize" value="<?php echo $ttlsize; ?>" size="12">
-				<span>z.B. 13px</span>
+				<span><?php _e('For example', 'plista'); ?> 13px</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_txtcolor">Text (Schriftfarbe)</label>
+				<label class="textlabel" for="plista_txtcolor"><?php _e('Text (font-color)', 'plista'); ?></label>
 				<input type="text" name="plista_txtcolor" value="<?php echo $txtcolor; ?>" size="12">
-				<span>z.B. #333333</span>
+				<span><?php _e('For example', 'plista'); ?> #333333</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_txtsize">Text (Schriftgröße)</label>
+				<label class="textlabel" for="plista_txtsize"><?php _e('Text (font-size)', 'plista'); ?>)</label>
 				<input type="text" name="plista_txtsize" value="<?php echo $txtsize; ?>" size="12">
-				<span>z.B. 12px</span>
+				<span><?php _e('For example', 'plista'); ?> 12px</span>
 			</p>
 
 			<p>
-				<label style="width: 280px; display: block; float: left" for="plista_txthover">MouseOver-Effekt (Hintergrundfarbe)</label>
+				<label class="textlabel" for="plista_txthover"><?php _e('Mouseover (background-color)', 'plista'); ?></label>
 				<input type="text" name="plista_txthover" value="<?php echo $txthover; ?>" size="12">
-				<span>z.B. #FFFFFF</span>
+				<span><?php _e('For example', 'plista'); ?> #FFFFFF</span>
 			</p>
 		</div>
 
 		<h3>plista pictureAds</h3>
-		<p>Um pictureAds nutzen zu können müssen die Artikelbilder mindestens 350px brei sein, kontaktieren Sie uns hierzu bitte unter <a href="mailto:wordpress@plista.com">wordpress@plista.com</a></p>
+		<p><?php printf(__('In order to use pictureAds the article images should at least have the size of 350px. For further information please contact %$1s', 'plista'), '<a href="mailto:wordpress@plista.com">wordpress@plista.com</a>'); ?></p>
 
 		<p>
-			<input style="margin: 4px" type="checkbox" id="plista_setpicads" name="plista_setpicads" value="1" <?php echo $setpicads ?>/>
-			<label for="plista_setpicads">plista pictureAds aktivieren.</label>
+			<input type="checkbox" id="plista_setpicads" name="plista_setpicads" value="1" <?php echo $setpicads ?>/>
+			<label for="plista_setpicads"><?php _e('Activate plista pictureAds', 'plista'); ?></label>
 		</p>
 
 		<p>
-			<label style="width: 280px; display: block; float: left" for="plista_blacklistpicads">Seiten ausschließen</label>
+			<label class="textlabel" for="plista_blacklistpicads"><?php _e('Exclude the following pages', 'plista'); ?></label>
 			<input type="text" name="plista_blacklistpicads" value="<?php echo $blacklistpicads; ?>" size="12">
-			<span>Gebe Sie hier die Seiten-ID`s (getrennt durch Kommas zb. 12, 3, 4) ein, bei welchen PictureAds deaktiviert werden sollen.</span>
+			<span><?php _e('Insert the Page-Id\'s separated by comma (for example: 2, 89, 520) where pictureAds should be excluded', 'plista'); ?>.</span>
 		</p>
-		<p>Nähere Informationen wie Sie die Seiten-ID finden gibt es <a href="http://en.support.wordpress.com/pages/#how-to-find-the-page-id" target="_blank">hier</a></p>
+		<p><?php _e('For more information about finding the page id please visit', 'plista');?> <a href="http://en.support.wordpress.com/pages/#how-to-find-the-page-id" target="_blank">wordpress.com</a>.</p>
 
 		<p class="submit">
 			<input type="submit" name="Submit" value="Speichern" />
 		</p>
 	</form>
-
-	<h3 id="updateplista">Löschen / Updaten eines Artikels</h3>
-	<p>Hierfür steht eine API zu Verfügung, welche es erlaubt einzelne Artikel zu löschen bzw. zu updaten. Kontaktieren Sie hierzu bitte unseren Publisher Support <a href="mailto:publisher@plista.com">publisher@plista.com</a></p>
 
 </div>
 <script>
