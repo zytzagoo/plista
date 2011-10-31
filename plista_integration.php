@@ -2,9 +2,9 @@
 	/***
 	Plugin Name: plista
 	Plugin URI: http://www.plista.com
-	Description: Plugin for displaying plista Recommendations
+	Description: Plugin for displaying plista RecommendationAds
 	Author: msch (wordpress@plista.com)
-	Version: 1.2
+	Version: 1.2.1
 	Author URI: http://www.plista.com
 	***/
 
@@ -59,9 +59,11 @@
 		if ($first_img) {
 			list($width, $height, $type, $attr) = @getimagesize($first_img);
 
-			if ($height >= '20' && $height >= '20') {
+			if (!is_null($height) && $height >= '20' && $height >= '20') {
 				return $first_img;
-			} 
+			} else {
+				return $first_img;
+			}
 		}
 		return '';
 	}
@@ -98,7 +100,7 @@
 		if ($editcss == 'checked="checked"') {
 				$plistacss = "var sn = document.createElement('style');
 				sn.setAttribute('type', 'text/css');
-				var tn = document.createTextNode('.plistaWidgetHead {color: ".$hlcolor." !important;background-color: ".$hlbgcolor." !important;}.plistaItem img {width: ".$imgsize." !important;max-height: ".$imgheight." !important;}.itemTitle {color: ".$ttlcolor." !important;font-size: ".$ttlsize." !important}.itemText {color: ".$txtcolor." !important;font-size: ".$txtsize." !important}.itemMore {color: ".$txtcolor." !important;}.plistaWidgetList a:hover,.plistaWidgetList a:active,.plistaWidgetList a:focus{background-color:  ".$txthover."  !important}.itemDate{color: ".$datecolor." !Important;font-size: ".$datesize." !Important;}'),
+				var tn = document.createTextNode('.plistaWidgetHead {color: ".$hlcolor." !important;background-color: ".$hlbgcolor." !important;}.plistaItem img, .itemLink img {width: ".$imgsize." !important;max-height: ".$imgheight." !important;}.itemTitle {color: ".$ttlcolor." !important;font-size: ".$ttlsize." !important}.itemText {color: ".$txtcolor." !important;font-size: ".$txtsize." !important}.itemMore {color: ".$txtcolor." !important;}.plistaWidgetList a:hover,.plistaWidgetList a:active,.plistaWidgetList a:focus{background-color:  ".$txthover."  !important}.itemDate{color: ".$datecolor." !Important;font-size: ".$datesize." !Important;}'),
 				ht = document.getElementsByTagName('head')[0];
 				sn.appendChild(tn);
 				ht.appendChild(sn)";
@@ -124,7 +126,7 @@
 					!is_archive() &&
 					!is_search()) {
 
-					return '<!-- plista wp Version 1.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
+					return '<!-- plista wp Version 1.2.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
 					<script type="text/javascript" src="'.$jspath.'"></script>
 					<script type="text/javascript">
 						/* <![CDATA[ */
@@ -144,7 +146,7 @@
 	function plista_integration ($content) {
 		global $post;
 		$text = get_the_content();
-		// filter all the bad stuff out
+		// filter all the bad stuff
 		$bad = array(
 			'@<script[^>]*?>.*?</script>@si',	// strip out javascript
 			'@<iframe[^>]*?>.*?</iframe>@si',	// strip out iframe
@@ -158,16 +160,19 @@
 		$id = get_the_id();
 		$youtubepattern = "/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/";
 		$isyoutube = preg_match($youtubepattern, $post->post_content);
-
+		
 		// first try to get the article thumbnail image
 		if ( function_exists('has_post_thumbnail') && has_post_thumbnail($id) ) {
 			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id), full );
-			$imgsrc = $thumbnail[0];	
+			$imgsrc = $thumbnail[0];
+		}
 		// if we couldn't find one, check for other images in the article
-		} else if (!empty($isyoutube)) {
-			$imgsrc = get_youtube_img();
-		} else {
-			$imgsrc = get_first_plista_image();
+		if (!$imgsrc || is_null($imgsrc)) {
+			if (!empty($isyoutube)) {
+				$imgsrc = get_youtube_img();
+			} else {
+				$imgsrc = get_first_plista_image();
+			}
 		}
 
 		$content .= plista_content(array(

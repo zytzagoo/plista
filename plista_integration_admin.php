@@ -118,7 +118,7 @@
 	<form name="plista_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 		<input type="hidden" name="plista_hidden" value="P">
 		<h3><?php _e('plista settings', 'plista'); ?></h3>
-		<h4><?php printf(__('Please pay attention to the %1$s', 'plista'), '<a target="_blank" href="http://wordpress.org/extend/plugins/plista/installation/">Readme</a>'); ?>. </h4>
+		<h4><?php printf(__('Please pay attention to the %1$s', 'plista'), '<a target="_blank" href="http://www.plista.com/plugins/wordpress/readme.txt">Readme</a>'); ?>. </h4>
 		<h3><?php _e('plista basic settings', 'plista'); ?></h3>
 		<p><?php printf(__('Please register at %1$s first to get all necessary data.', 'plista'), '<a href="https://www.plista.com/publisher_registrations/domain">plista.com</a>'); ?></p>
 		<p>
@@ -135,7 +135,7 @@
 
 
 		<h3><?php _e('Widget position', 'plista'); ?></h3>
-		<p><?php printf(__('The widget will be shown automatically at the bottom of every article. Only check the option if you want to insert the widget on a different position like the sidebar. You will find more information in the %1$s', 'plista'), '<a target="_blank" href="http://wordpress.org/extend/plugins/plista/installation/">Readme</a>'); ?>.</p>
+		<p><?php printf(__('The widget will be shown automatically at the bottom of every article. Only check the option if you want to insert the widget on a different position like the sidebar. You will find more information in the %1$s', 'plista'), '<a target="_blank" href="http://www.plista.com/plugins/wordpress/readme.txt">Readme</a>'); ?>.</p>
 		<p>
 			<input type="checkbox" id="plista_autoinsert" name="plista_autoinsert" value="1" <?php echo $autoinsert ?>/>
 			<label  for="plista_autoinsert"><?php _e('I would like to position the widget', 'plista'); ?></label>

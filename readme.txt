@@ -4,8 +4,10 @@ Donate link: http://www.plista.com
 Contributors: plista.com
 Requires at least: 2.5.0
 Tested up to: 3.2.1
-Stable tag: 1.2
+Stable tag: 1.2.1
 Text Domain: plista
+
+The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
 == Description ==
 
@@ -73,3 +75,6 @@ none
 1.2 @ 10-05-2011
 	* better handling for img indexing
 	* english translation v1
+
+1.2.1 @ 10-31-2011
+	* fixes picture related bugs
