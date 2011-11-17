@@ -230,7 +230,7 @@
 		</div>
 
 		<h3>plista pictureAds</h3>
-		<p><?php printf(__('In order to use pictureAds the article images should at least have the size of 350px. For further information please contact %$1s', 'plista'), '<a href="mailto:wordpress@plista.com">wordpress@plista.com</a>'); ?></p>
+		<p><?php printf(__('In order to use pictureAds the article images should at least have the size of 350px. For further information please contact %1$s', 'plista'), '<a href="mailto:wordpress@plista.com">wordpress@plista.com</a>'); ?></p>
 
 		<p>
 			<input type="checkbox" id="plista_setpicads" name="plista_setpicads" value="1" <?php echo $setpicads ?>/>

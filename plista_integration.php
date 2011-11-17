@@ -28,7 +28,8 @@
 	// autoinsert widget after content or not
 	$autoinsert = get_option('plista_autoinsert');
 	if ($autoinsert != 'checked="checked"') {
-		add_filter('the_content', 'plista_integration');
+		// set the priority very high so that the plista plugin is the last being inserted
+		add_filter('the_content', 'plista_integration', 10000);
 
 	}
 
