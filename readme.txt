@@ -2,10 +2,10 @@
 Tags: advertising, recommendations, plista, similar items, ads, related articles
 Donate link: http://www.plista.com
 Contributors: plista.com
+Text Domain: plista
 Requires at least: 2.5.0
 Tested up to: 3.2.1
-Stable tag: 1.2.1
-Text Domain: plista
+Stable tag: 1.3.0
 
 The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
@@ -30,7 +30,7 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 
 == Installation == 
 
-1. Speichern Sie die das plist plugin auf Ihren Desktop.
+1. Speichern Sie die das plista plugin auf Ihren Desktop.
 2. Loggen Sie sich mit Ihren Zugangsdaten in ihren Wordpress Administrationsbereich ein.
 3. Wählen Sie das Menü "Plugin" aus.
 4. Wählen Sie den Untermenü-Punkt "Installieren" aus.
@@ -40,7 +40,7 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 8. Aktivieren Sie das Plugin.
 9. Registrieren Sie sich unter www.plista.com/publisher_registrations um das Widget nutzen zu können.
 10. Unter Einstellungen finden Sie den Punkt plista, hier müssen Sie unbedingt noch den "Name des Widgets" und die "URL des Widgets" angeben. (Diese erhalten Sie unter https://www.plista.com/publishers/dashboard unter dem Punkt "Angelegte Domains" bei Klick auf "Code")
-11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen <?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>
+11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen `<?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>`
 12. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
@@ -78,3 +78,9 @@ none
 
 1.2.1 @ 10-31-2011
 	* fixes picture related bugs
+
+1.3.0 @ 12-07-2011
+	* use wp_head to set custom css
+	* improved styles for admin page
+	* possibility to change widget style for mobile design (wptouch required)
+	* possibility to set a default image
