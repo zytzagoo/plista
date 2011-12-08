@@ -5,7 +5,7 @@ Contributors: plista.com
 Text Domain: plista
 Requires at least: 2.5.0
 Tested up to: 3.2.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
@@ -57,7 +57,8 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-if you position the widget by yourself, you have to change `<?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>` to `<?php if (class_exists('plista')) { echo plista::plista_integration ($content); } ?>`
+= 1.3.1 =
+if you position the widget by yourself, you should upgrade from 1.3.0 to 1.3.1 immediately.
 
 == Screenshots ==
 
@@ -84,3 +85,6 @@ if you position the widget by yourself, you have to change `<?php if (function_e
 	* improved styles for admin page
 	* possibility to change widget style for mobile design (wptouch required)
 	* possibility to set a default image
+
+1.3.1 @ 12-08-2011
+	* plista_integration function is no global available

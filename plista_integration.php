@@ -4,7 +4,7 @@
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
 	Author: msch (wordpress@plista.com)
-	Version: 1.3.0
+	Version: 1.3.1
 	Author URI: http://www.plista.com
 	***/
 
@@ -216,7 +216,7 @@ class plista {
 					!is_archive() &&
 					!is_search()) {
 
-					return '<!-- plista wp Version 1.3.0 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
+					return '<!-- plista wp Version 1.3.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
 					<script type="text/javascript" src="'.$jspath.'"></script>
 					<script type="text/javascript">
 						'.$plistapush.'
@@ -282,4 +282,8 @@ class plista {
 
 }
 plista::init();
+
+function plista_integration() {
+	return plista::plista_integration();
+}
 ?>
