@@ -40,7 +40,7 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 8. Aktivieren Sie das Plugin.
 9. Registrieren Sie sich unter www.plista.com/publisher_registrations um das Widget nutzen zu können.
 10. Unter Einstellungen finden Sie den Punkt plista, hier müssen Sie unbedingt noch den "Name des Widgets" und die "URL des Widgets" angeben. (Diese erhalten Sie unter https://www.plista.com/publishers/dashboard unter dem Punkt "Angelegte Domains" bei Klick auf "Code")
-11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen `<?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>`
+11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen `<?php if (class_exists('plista')) { echo plista::plista_integration ($content); } ?>`
 12. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
@@ -57,7 +57,7 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-none
+if you position the widget by yourself, you have to change `<?php if (function_exists('plista_integration')) { echo plista_integration ($content); } ?>` to `<?php if (class_exists('plista')) { echo plista::plista_integration ($content); } ?>`
 
 == Screenshots ==
 
