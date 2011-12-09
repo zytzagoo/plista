@@ -194,7 +194,7 @@ class plista {
 		$isreclist = array_search((string)$postid, explode(',', $blacklistrecads));
 
 		if ($setpicads == 'checked="checked"' && $ispiclist === false && !$ismobile) {
-				$plistapicads = 'PLISTA.pictureads.enable(true);';
+			$plistapicads = 'PLISTA.pictureads.enable(true);';
 		}
 		
 		if (!$ismobile) {
@@ -284,6 +284,6 @@ class plista {
 plista::init();
 
 function plista_integration() {
-	return plista::plista_integration();
+	return plista::plista_integration(NULL);
 }
 ?>
