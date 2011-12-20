@@ -204,7 +204,7 @@ if($_POST['plista_hidden'] == 'P') {
 			<p><?php _e('Define a default image for articles without an image.', 'plista') ?></p>
 			<p>
 				<label class="textlabel" for="plista_defaultimg"><?php _e('Default image', 'plista'); ?></label>
-				<input required type="text" name="plista_defaultimg" value="<?php echo $defaultimg; ?>" size="80">
+				<input type="text" name="plista_defaultimg" value="<?php echo $defaultimg; ?>" size="80">
 				<span><?php _e('e.g.', 'plista'); ?> http://www.example.org/default.jpg</span>
 			</p>
 		</div>

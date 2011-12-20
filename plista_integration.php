@@ -252,7 +252,7 @@ class plista {
 		
 		// first try to get the article thumbnail image
 		if ( function_exists('has_post_thumbnail') && has_post_thumbnail($id) ) {
-			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id), full );
+			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id));
 			$imgsrc = $thumbnail[0];
 		}
 		// if we couldn't find one, check for other images in the article
