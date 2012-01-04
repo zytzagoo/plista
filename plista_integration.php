@@ -4,6 +4,7 @@
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
 	Author: msch (wordpress@plista.com)
+	Version: 1.3.2
 	Author URI: http://www.plista.com
 	***/
 
