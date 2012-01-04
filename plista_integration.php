@@ -4,11 +4,12 @@
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
 	Author: msch (wordpress@plista.com)
-	Version: 1.3.1
 	Author URI: http://www.plista.com
 	***/
 
 class plista {
+
+	const VERSION = '1.3.2';
 
 	/**
 	 * combatibilitycheck 
@@ -53,6 +54,29 @@ class plista {
 	 */
 	public function plista_admin() {
 		include('plista_integration_admin.php');
+	}
+
+	/**
+	 * define plista wp version
+	 *
+	 * @return string
+	 */
+	public function plista_version() {
+		return self::VERSION;
+	}
+
+
+	/**
+	* simple check if wptouch is active
+	*
+	* @return boolean
+	*/
+	public function plista_ismobile() {
+		if (preg_match('/wptouch/', get_stylesheet_directory_uri())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 
@@ -122,15 +146,11 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function head() {		
-		// simple check if wptouch is active
-		$ismobile = false;
-		if (preg_match('/wptouch/', get_stylesheet_directory_uri())) {
-			$ismobile = true;
-		}
-	
+	public function head() {	
+
 		// styles for mobile widget
 		$mobile_editcss = get_option( 'plista_mobile_editcss' );
+		$mobile_hlsize = get_option( 'plista_mobile_hlsize' );
 		$mobile_hlcolor = get_option( 'plista_mobile_hlcolor' );
 		$mobile_hlbgcolor = get_option( 'plista_mobile_hlbgcolor' );
 		$mobile_imgsize = get_option( 'plista_mobile_imgsize' );
@@ -142,6 +162,7 @@ class plista {
 
 		// styles for non-mobile widget
 		$editcss = get_option( 'plista_editcss' );
+		$hlsize = get_option( 'plista_hlsize' );
 		$hlcolor = get_option( 'plista_hlcolor' );
 		$hlbgcolor = get_option( 'plista_hlbgcolor' );
 		$imgsize = get_option( 'plista_imgsize' );
@@ -151,29 +172,79 @@ class plista {
 		$txtcolor = get_option( 'plista_txtcolor' );
 		$txtsize = get_option( 'plista_txtsize' );
 		$txthover = get_option( 'plista_txthover' );
-		
-		$plistacss = '';
 
-		if (!$ismobile && $editcss == 'checked="checked"') {
-				$plistacss = ".plistaWidgetHead {color: ".$hlcolor." !important;background-color: ".$hlbgcolor." !important;}.plistaItem img, .itemLink img {width: ".$imgsize." !important;max-height: ".$imgheight." !important;}.itemTitle {color: ".$ttlcolor." !important;font-size: ".$ttlsize." !important}.itemText {color: ".$txtcolor." !important;font-size: ".$txtsize." !important}.itemMore {color: ".$txtcolor." !important;}";
-		} else if ($ismobile && $mobile_editcss == 'checked="checked"') {
-				$plistacss = ".plistaWidgetHead {color: ".$mobile_hlcolor." !important;background-color: ".$mobile_hlbgcolor." !important;}.plistaItem img, .itemLink img {width: ".$mobile_imgsize." !important;max-height: ".$mobile_imgheight." !important;}.itemTitle {color: ".$mobile_ttlcolor." !important;font-size: ".$mobile_ttlsize." !important}.itemText {color: ".$mobile_txtcolor." !important;font-size: ".$mobile_txtsize." !important}.itemMore {color: ".$mobile_txtcolor." !important;}.plistaWidgetList a:hover,.plistaWidgetList a:active,.plistaWidgetList a:focus{background-color:  ".$mobile_txthover."  !important}";
+		$plistacss = false;
+
+		if (!self::plista_ismobile() && $editcss == 'checked="checked"') {
+				$plistacss = ".plistaWidgetHead {
+								font-size: ".$hlsize." !important;
+								color: ".$hlcolor." !important;
+								background-color: ".$hlbgcolor." !important;
+							}
+
+							.plistaItem img,
+							.itemLink img {
+								width: ".$imgsize." !important;
+								max-height: ".$imgheight." !important;
+							}
+
+							.itemTitle {
+								color: ".$ttlcolor." !important;
+								font-size: ".$ttlsize." !important
+							}
+
+							.itemText {
+									color: ".$txtcolor." !important;
+									font-size: ".$txtsize." !important
+							}
+
+							.itemMore {color: ".$txtcolor." !important;}
+
+							.plistaWidgetList a:hover,
+							.plistaWidgetList a:active,
+							.plistaWidgetList a:focus{background-color:  ".$txthover."  !important}
+				";
+
+		} else if ($mobile_editcss == 'checked="checked"') {
+				$plistacss = ".plistaWidgetHead {
+								font-size: ".$mobile_hlsize." !important;
+								color: ".$mobile_hlcolor." !important;
+								background-color: ".$mobile_hlbgcolor." !important;
+							}
+
+							.plistaItem img,
+							.itemLink img {
+								width: ".$mobile_imgsize." !important;
+								max-height: ".$mobile_imgheight." !important;
+							}
+
+							.itemTitle {
+								color: ".$mobile_ttlcolor." !important;
+								font-size: ".$mobile_ttlsize." !important
+							}
+
+							.itemText {
+								color: ".$mobile_txtcolor." !important;
+								font-size: ".$mobile_txtsize." !important
+							}
+
+							.itemMore {color: ".$mobile_txtcolor." !important;}
+				";
 		}
-		if ($plistacss != '') {
-			?>
-			<style type="text/css" rel="stylesheet"><?php echo $plistacss ?></style>
-			<?php
+		if ($plistacss) {
+			echo '<style type="text/css">'.$plistacss.'</style>';
 		}
+
 		return;
-
 	}
-	
+
 	/**
 	 * main plista js code
 	 *
 	 * @return string
 	 */
 	public function plista_content( $plista_data ) {
+
 		$widgetname = get_option( 'plista_widgetname' );  
        	$jspath = get_option( 'plista_jspath' );
 		
@@ -182,22 +253,24 @@ class plista {
 		$blacklistpicads = get_option( 'plista_blacklistpicads' );
 		$blacklistrecads = get_option( 'plista_blacklistrecads' );
 		$categories = get_option( 'plista_categories' );
+		$mobile_categories = get_option( 'plista_mobile_categories' );
 		$cat_ID = array();
 		$post_categories = get_the_category();
 		foreach($post_categories as $category) {
 			array_push($cat_ID,$category->cat_ID);
 		}
 		$iscategory = is_array($categories) ? array_intersect($cat_ID, $categories) : '';
+		$ismobilecategory = is_array($mobile_categories) ? array_intersect($cat_ID, $mobile_categories) : '';
 		$plistapicads = '';
 		$postid = get_the_ID();
 		$ispiclist = array_search((string)$postid, explode(',', $blacklistpicads));
 		$isreclist = array_search((string)$postid, explode(',', $blacklistrecads));
 
-		if ($setpicads == 'checked="checked"' && $ispiclist === false && !$ismobile) {
-			$plistapicads = 'PLISTA.pictureads.enable(true);';
-		}
-		
-		if (!$ismobile) {
+		if (!self::plista_ismobile()) {
+			if ($setpicads == 'checked="checked"' && $ispiclist === false && empty($ismobilecategory)) {
+				$plistapicads = 'PLISTA.pictureads.enable(true);';
+			}
+
 			$plistapush = 'PLISTA.items.push('.json_encode($plista_data).');';
 		}
 
@@ -216,7 +289,7 @@ class plista {
 					!is_archive() &&
 					!is_search()) {
 
-					return '<!-- plista wp Version 1.3.1 - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
+					return '<!-- plista wp Version '.self::plista_version().' - PHP Version: '.PHP_VERSION.'--><div id="'.$widgetname.'"></div>
 					<script type="text/javascript" src="'.$jspath.'"></script>
 					<script type="text/javascript">
 						'.$plistapush.'

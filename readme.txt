@@ -4,8 +4,8 @@ Donate link: http://www.plista.com
 Contributors: plista.com
 Text Domain: plista
 Requires at least: 2.5.0
-Tested up to: 3.2.1
-Stable tag: 1.3.1
+Tested up to: 3.3.1
+Stable tag: 1.3.2
 
 The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
@@ -40,7 +40,7 @@ Um die dieses Plug-in nutzen zu können ist PHP5 notwendig.
 8. Aktivieren Sie das Plugin.
 9. Registrieren Sie sich unter www.plista.com/publisher_registrations um das Widget nutzen zu können.
 10. Unter Einstellungen finden Sie den Punkt plista, hier müssen Sie unbedingt noch den "Name des Widgets" und die "URL des Widgets" angeben. (Diese erhalten Sie unter https://www.plista.com/publishers/dashboard unter dem Punkt "Angelegte Domains" bei Klick auf "Code")
-11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer single.php ergänzen `<?php if (class_exists('plista')) { echo plista::plista_integration ($content); } ?>`
+11. Falls Sie bei Autoinsert ein Häkchen gesetzt haben, müssen Sie noch folgendes an beliebiger Stelle in Ihrer z.B. single.php ergänzen `<?php if (class_exists('plista')) { echo plista::plista_integration ($content); } ?>`
 12. Plista ist jetzt aktiv und kann genutzt werden
 
 == Frequently Asked Questions ==
@@ -57,13 +57,13 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-= 1.3.1 =
-if you position the widget by yourself, you should upgrade from 1.3.0 to 1.3.1 immediately.
+= 1.3.2 =
+fixing a bug with the design options
 
 == Screenshots ==
 
 1. plista Adminpage
-2. Beispiel eines plista Widgets	
+2. Beispiel eines plista Widgets
 
 == Changelog ==
 
@@ -88,3 +88,9 @@ if you position the widget by yourself, you should upgrade from 1.3.0 to 1.3.1 i
 
 1.3.1 @ 12-08-2011
 	* plista_integration function is no global available
+
+1.3.2 @ 01-04-2012
+	* fix css bugs
+    * added new possibilities to style the widget
+	* added possibility to exclude categories for pictureAds
+	* tested functionality width wordpress 3.3.1

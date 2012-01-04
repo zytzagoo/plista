@@ -34,6 +34,8 @@
 	background-image: linear-gradient(center top , #eee, #ddd);
 }
 
+.plistabox h3 span {font-size: 11px}
+
 .plistabox p span {
 	font-size: 12px;
 	font-style: italic;

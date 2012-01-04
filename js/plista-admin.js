@@ -8,24 +8,24 @@ function plistaadmin() {
 
 	pdesign.style.display = pmdesign.style.display = 'none';
 
-	if (pcheckdesign.checked === '1') {
+	if (pcheckdesign.checked == '1') {
 		pdesign.style.display = 'block';
 	}
 
 	pcheckdesign.onchange = function () {
-		if (pcheckdesign.checked === '1') {
+		if (pcheckdesign.checked == '1') {
 			pdesign.style.display = 'block';
 		} else {
 			pdesign.style.display = 'none';
 		}
 	};
 
-	if (pmcheckdesign.checked === '1') {
+	if (pmcheckdesign.checked == '1') {
 		pmdesign.style.display = 'block';
 	}
 
 	pmcheckdesign.onchange = function () {
-		if (pmcheckdesign.checked === '1') {
+		if (pmcheckdesign.checked == '1') {
 			pmdesign.style.display = 'block';
 		} else {
 			pmdesign.style.display = 'none';
