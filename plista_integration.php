@@ -3,14 +3,14 @@
 	Plugin Name: plista
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
+	Version: 1.3.3
 	Author: msch (wordpress@plista.com)
-	Version: 1.3.2
 	Author URI: http://www.plista.com
 	***/
 
 class plista {
 
-	const VERSION = '1.3.2';
+	const VERSION = '1.3.3';
 
 	/**
 	 * combatibilitycheck 
@@ -32,8 +32,8 @@ class plista {
 			exit ($exit_msg_wp);
 		}
 
-		$plugin_path = plugin_basename( dirname( __FILE__ ) .'/lang' );
-		load_plugin_textdomain( 'plista', '', $plugin_path );
+		$plista_lang_path = plugin_basename( dirname( __FILE__ ) .'/lang' );
+		load_plugin_textdomain( 'plista', '', $plista_lang_path );
 
 		// autoinsert widget after content or not
 		$autoinsert = get_option('plista_autoinsert');
@@ -88,8 +88,8 @@ class plista {
 	 */
 	public function plista_admin_actions() {
 		if( current_user_can('level_10')) {
-			wp_enqueue_script( 'plista-admin', plugins_url('/js/plista-admin.js', __FILE__), array(), '1.1' );
-			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.1' );
+			wp_enqueue_script( 'plista-admin', plugins_url('/js/plista-admin.js', __FILE__), array(), '1.3' );
+			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.3' );
 			add_options_page('plista', 'plista', 1, 'plista', array(__CLASS__, 'plista_admin'));
 		}
 
@@ -253,15 +253,33 @@ class plista {
 		$setblacklist = get_option( 'plista_setblacklist' );
 		$blacklistpicads = get_option( 'plista_blacklistpicads' );
 		$blacklistrecads = get_option( 'plista_blacklistrecads' );
+		$tags = get_option( 'plista_tags' );
+		$tag_ID = array();
+		$post_tags = get_the_tags();
+		if (isset($post_tags)) {
+			foreach($post_tags as $tag) {
+				array_push($tag_ID,$tag->term_id);
+			}
+			$istag = is_array($tags) ? array_intersect($tag_ID, $tags) : '';
+		} else {
+			$istag = '';
+		}
+
 		$categories = get_option( 'plista_categories' );
 		$mobile_categories = get_option( 'plista_mobile_categories' );
 		$cat_ID = array();
 		$post_categories = get_the_category();
-		foreach($post_categories as $category) {
-			array_push($cat_ID,$category->cat_ID);
+		if (isset($post_categories)) {
+			foreach($post_categories as $category) {
+				array_push($cat_ID,$category->cat_ID);
+			}
+			$iscategory = is_array($categories) ? array_intersect($cat_ID, $categories) : '';
+			$ismobilecategory = is_array($mobile_categories) ? array_intersect($cat_ID, $mobile_categories) : '';
+		} else {
+			$iscategory = '';
+			$ismobilecategory = '';
 		}
-		$iscategory = is_array($categories) ? array_intersect($cat_ID, $categories) : '';
-		$ismobilecategory = is_array($mobile_categories) ? array_intersect($cat_ID, $mobile_categories) : '';
+
 		$plistapicads = '';
 		$postid = get_the_ID();
 		$ispiclist = array_search((string)$postid, explode(',', $blacklistpicads));
@@ -271,12 +289,11 @@ class plista {
 			if ($setpicads == 'checked="checked"' && $ispiclist === false && empty($ismobilecategory)) {
 				$plistapicads = 'PLISTA.pictureads.enable(true);';
 			}
-
 			$plistapush = 'PLISTA.items.push('.json_encode($plista_data).');';
 		}
 
 		//blacklist some pages where widget should never be shown
-		if ($isreclist === false && empty($iscategory)) {
+		if ($isreclist === false && empty($iscategory) && empty($istag) && empty($ismobilecategory)) {
 			if(strpos($_SERVER['REQUEST_URI'], '/attachment/') == false) {
 				if((is_single() || is_page()) &&
 					!is_attachment() &&
@@ -331,10 +348,25 @@ class plista {
 		}
 		// if we couldn't find one, check for other images in the article
 		if (!$imgsrc || is_null($imgsrc)) {
-			if (!empty($isyoutube)) {
-				$imgsrc = self::get_youtube_img();
-			} else {
+			$attachments = get_children( array(
+				'post_parent'    => get_the_ID(),
+				'post_type'      => 'attachment',
+				'numberposts'    => 1, // show all -1
+				'post_status'    => 'inherit',
+				'post_mime_type' => 'image',
+				'order'          => 'ASC',
+				'orderby'        => 'menu_order ASC'
+			));
+
+			foreach ( $attachments as $attachment_id => $attachment ) {
+				$thumbnail = wp_get_attachment_image_src( $attachment_id );
+				$imgsrc = $thumbnail[0];
+			}
+			if (!$imgsrc || is_null($imgsrc)) {
 				$imgsrc = self::get_first_plista_image();
+				if (!$imgsrc || is_null($imgsrc) && !empty($isyoutube)) {
+					$imgsrc = self::get_youtube_img();
+				}
 			}
 		}
 

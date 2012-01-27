@@ -5,13 +5,13 @@ Contributors: plista.com
 Text Domain: plista
 Requires at least: 2.5.0
 Tested up to: 3.3.1
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 
 The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
 == Description ==
 
-Ihre Vorteile auf einen Blick:
+= Vorteile =
 
 - Erstes Werbeformat mit Besucher-Mehrwert
 - Traffic und gleichzeitig Umsätze erhöhen
@@ -23,6 +23,10 @@ Das neue präferenzbasierte plista Werbeformat bietet Publishern eine innovative
 Mit unserem Werbeformat zeigen Sie Ihren Besuchern nutzerindividuellen Inhalt in einem relevanten Kontext. 
 Die Schlüsseltechnologie von plista filtert webseitenübergreifend Inhalte von Internetseiten und ermittelt deren Relevanz. 
 Die Besucher Ihrer Internetseite werden nur die Inhalte angezeigt, die seinen Präferenzen entsprechen und ermöglicht Publishern eine zielgenaue Ansprache.
+
+= Übersetzungen =
+
+* Spanish (es_ES) - Ramon Navarro
 
 == Premises ==
 
@@ -57,8 +61,7 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-= 1.3.2 =
-fixing a bug with the design options
+none
 
 == Screenshots ==
 
@@ -94,3 +97,11 @@ fixing a bug with the design options
     * added new possibilities to style the widget
 	* added possibility to exclude categories for pictureAds
 	* tested functionality width wordpress 3.3.1
+
+1.3.3 @ 01-27-2012
+	* change order of image indexing
+	* added spanish translations
+	* jslint javascript used for admin page
+	* added notice to contact plista before activating pictureAds
+	* added possibility to exclude tags
+

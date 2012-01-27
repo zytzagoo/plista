@@ -1,19 +1,23 @@
 <?php
-if($_POST['plista_hidden'] == 'P') {
+$plistachange = isset($_POST['plista_hidden']) ? $_POST['plista_hidden'] : '';
+if($plistachange == 'P') {
 
-	$categories = $_POST['plista_categories'];
+	$categories = isset($_POST['plista_categories']) ? $_POST['plista_categories'] : '';
 	update_option('plista_categories', $categories);
 
-	$mobile_categories = $_POST['plista_mobile_categories'];
+	$tags = isset($_POST['plista_tags']) ? $_POST['plista_tags'] : '';
+	update_option('plista_tags', $tags);
+
+	$mobile_categories = isset($_POST['plista_mobile_categories']) ? $_POST['plista_mobile_categories'] : '';
 	update_option('plista_mobile_categories', $mobile_categories);
 
-	$widgetname = $_POST['plista_widgetname'];
+	$widgetname = isset($_POST['plista_widgetname']) ? $_POST['plista_widgetname'] : '';
 	update_option('plista_widgetname', $widgetname); 
 
-	$jspath = $_POST['plista_jspath'];  
+	$jspath = isset($_POST['plista_jspath']) ? $_POST['plista_jspath'] : '';  
 	update_option('plista_jspath', $jspath); 
 
-	$autoinsert = $_POST['plista_autoinsert'];
+	$autoinsert = isset($_POST['plista_autoinsert']) ? $_POST['plista_autoinsert'] : '';
 	update_option('plista_autoinsert', $autoinsert);
 	if (get_option('plista_autoinsert')) {
 			$autoinsert = 'checked="checked"';
@@ -22,10 +26,10 @@ if($_POST['plista_hidden'] == 'P') {
 			$autoinsert = '';
 	}
 
-	$defaultimg = $_POST['plista_defaultimg'];  
+	$defaultimg = isset($_POST['plista_defaultimg']) ? $_POST['plista_defaultimg'] : '';  
 	update_option('plista_defaultimg', $defaultimg); 
 	
-	$editcss = $_POST['plista_editcss'];
+	$editcss = isset($_POST['plista_editcss']) ? $_POST['plista_editcss'] : '';
 	update_option('plista_editcss', $editcss);
 	if (get_option('plista_editcss')) {
 		$editcss = 'checked="checked"';
@@ -34,7 +38,7 @@ if($_POST['plista_hidden'] == 'P') {
 		$editcss = '';
 	}
 
-	$mobile_editcss = $_POST['plista_mobile_editcss'];
+	$mobile_editcss = isset($_POST['plista_mobile_editcss']) ? $_POST['plista_mobile_editcss'] : '';
 	update_option('plista_mobile_editcss', $mobile_editcss);
 	if (get_option('plista_mobile_editcss')) {
 		$mobile_editcss = 'checked="checked"';
@@ -43,7 +47,7 @@ if($_POST['plista_hidden'] == 'P') {
 		$mobile_editcss = '';
 	}
 
-	$setpicads = $_POST['plista_setpicads'];
+	$setpicads = isset($_POST['plista_setpicads']) ? $_POST['plista_setpicads'] : '';
 	update_option('plista_setpicads', $setpicads);
 	if (get_option('plista_setpicads')) {
 		$setpicads = 'checked="checked"';
@@ -52,7 +56,7 @@ if($_POST['plista_hidden'] == 'P') {
 		$setpicads = '';
 	}
 
-	$setblacklist = $_POST['plista_setblacklist'];
+	$setblacklist = isset($_POST['plista_setblacklist']) ? $_POST['plista_setblacklist'] : '';
 	update_option('plista_setblacklist', $setblacklist);
 	if (get_option('plista_setblacklist')) {
 		$setblacklist = 'checked="checked"';
@@ -119,14 +123,10 @@ if($_POST['plista_hidden'] == 'P') {
     update_option('plista_mobile_txtsize', $mobile_txtsize);
 
 
-
-	$domainid = $_POST['plista_domainid'];
-    update_option('plista_domainid', $domainid);
-
-	$blacklistpicads = $_POST['plista_blacklistpicads'];
+	$blacklistpicads = isset($_POST['plista_blacklistpicads']) ? $_POST['plista_blacklistpicads'] : '';
     update_option('plista_blacklistpicads', $blacklistpicads);
 
-	$blacklistrecads = $_POST['plista_blacklistrecads'];
+	$blacklistrecads = isset($_POST['plista_blacklistrecads']) ? $_POST['plista_blacklistrecads'] : '';
     update_option('plista_blacklistrecads', $blacklistrecads);
 
 ?>
@@ -169,6 +169,7 @@ if($_POST['plista_hidden'] == 'P') {
 	$blacklistpicads = get_option('plista_blacklistpicads');
 	$blacklistrecads = get_option('plista_blacklistrecads');
 	$categories = get_option('plista_categories');
+	$tags = get_option('plista_tags');
 	$mobile_categories = get_option('plista_mobile_categories');
 }
 ?>
@@ -236,12 +237,34 @@ if($_POST['plista_hidden'] == 'P') {
 			</p>
 		</div>
 
+		<?php
+			$wp_tags = get_tags(array('orderby' => 'count', 'order' => 'DESC'));
+			if ($wp_tags) {
+		?>
+		<div class="plistabox">	
+			<h3><?php _e('Exclude tags', 'plista'); ?></h3>
+			<ul class="plista-categories">
+			<?php
+			foreach ($wp_tags as $wp_tag) {
+			?>
+				<li>
+					<input type="checkbox" name="plista_tags[]" value="<?= $wp_tag->term_id; ?>" <?php if (is_array($tags) && in_array($wp_tag->term_id,$tags)) echo "checked"; ?>/>
+					<label for="plista_tags[]"><?= $wp_tag->name; ?></label>
+				</li>
+				
+		  	<?php } ?>
+			</ul>
+			<div class="plistaclear"></div>
+		</div>
+		<?php } ?>
+
 		<div class="plistabox">	
 			<h3><?php _e('Exclude categories', 'plista'); ?></h3>
 			<ul class="plista-categories">
 			<?php 
-			$wp_categories = get_categories();
-			foreach ($wp_categories as $wp_category): ?>
+			$wp_categories = get_categories(array('orderby' => 'count', 'order' => 'DESC'));
+			foreach ($wp_categories as $wp_category): 
+			?>
 				<li>
 					<input type="checkbox" name="plista_categories[]" value="<?= $wp_category->cat_ID; ?>" <?php if (is_array($categories) && in_array($wp_category->cat_ID,$categories)) echo "checked"; ?>/>
 					<label for="plista_categories[]"><?= $wp_category->cat_name; ?></label>
@@ -379,31 +402,33 @@ if($_POST['plista_hidden'] == 'P') {
 
 		<div id="plistapicads" class="plistabox">
 			<h3>plista pictureAds <span class="optional">*<?php _e('optional', 'plista') ?></span></h3>
-			<p><?php printf(__('In order to use pictureAds the article images should at least have the size of 350px. For further information please contact %1$s', 'plista'), '<a href="mailto:wordpress@plista.com">wordpress@plista.com</a>'); ?></p>
+			<p class="picadinfo" id="plista_picads_info"><?php _e('Did plista prepare pictureAds for this domain? Otherwise feel free to contact the Support-Team.', 'plista'); ?> <br /> <?php printf(__('In order to use pictureAds the article images should at least have the size of 350px. For further information please contact %1$s', 'plista'), '<a href="mailto:wordpress@plista.com">wordpress@plista.com</a>'); ?><span id="plista_picads_info_close"><?php _e('close', 'plista'); ?></span></p>
 
 			<p>
 				<input type="checkbox" id="plista_setpicads" name="plista_setpicads" value="1" <?php echo $setpicads ?>/>
 				<label for="plista_setpicads"><?php _e('Activate plista pictureAds', 'plista'); ?></label>
 			</p>
 
-			<p><?php _e('Exclude categories', 'plista'); ?></p>
-			<ul class="plista-categories">
-			<?php 
-			$wp_categories = get_categories();
-			foreach ($wp_categories as $wp_category): ?>
-				<li>
-					<input type="checkbox" name="plista_mobile_categories[]" value="<?= $wp_category->cat_ID; ?>" <?php if (is_array($mobile_categories) && in_array($wp_category->cat_ID,$mobile_categories)) echo "checked"; ?>/>
-					<label for="plista_mobile_categories[]"><?= $wp_category->cat_name; ?></label>
-				</li>
-		  	<?php endforeach; ?>
-			</ul>
+			<div id="ppicadsadditional">
+				<p><?php _e('Exclude categories', 'plista'); ?></p>
+				<ul class="plista-categories">
+				<?php 
+				$wp_categories = get_categories();
+				foreach ($wp_categories as $wp_category): ?>
+					<li>
+						<input type="checkbox" name="plista_mobile_categories[]" value="<?= $wp_category->cat_ID; ?>" <?php if (is_array($mobile_categories) && in_array($wp_category->cat_ID,$mobile_categories)) echo "checked"; ?>/>
+						<label for="plista_mobile_categories[]"><?= $wp_category->cat_name; ?></label>
+					</li>
+			  	<?php endforeach; ?>
+				</ul>
 
-			<p>
-				<label class="textlabel" for="plista_blacklistpicads"><?php _e('Exclude the following pages', 'plista'); ?></label>
-				<input type="text" name="plista_blacklistpicads" value="<?php echo $blacklistpicads; ?>" size="42">
-				<span><?php _e('Insert the Page-Id\'s separated by comma (e.g.: 2, 89, 520) where pictureAds should be excluded', 'plista'); ?>.</span>
-			</p>
-			<p><?php _e('For more information about finding the page id please visit', 'plista');?> <a href="http://en.support.wordpress.com/pages/#how-to-find-the-page-id" target="_blank">wordpress.com</a>.</p>
+				<p>
+					<label class="textlabel" for="plista_blacklistpicads"><?php _e('Exclude the following pages', 'plista'); ?></label>
+					<input type="text" name="plista_blacklistpicads" value="<?php echo $blacklistpicads; ?>" size="42">
+					<span><?php _e('Insert the Page-Id\'s separated by comma (e.g.: 2, 89, 520) where pictureAds should be excluded', 'plista'); ?>.</span>
+				</p>
+				<p><?php _e('For more information about finding the page id please visit', 'plista');?> <a href="http://en.support.wordpress.com/pages/#how-to-find-the-page-id" target="_blank">wordpress.com</a>.</p>
+			</div>
 		</div>
 
 		<p class="submit">

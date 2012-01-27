@@ -71,6 +71,29 @@
 	display: block
 }
 
+.plistahide {display: none}
+
+.plistashow {display: block}
+
 .plistaclear {clear: both}
 
 .plistawrapper .submit {padding: 0}
+
+#plista_picads_info {
+    background-color: #FFDDDC;
+    margin: -20px 0 0;
+    padding: 10px;
+	border-top: 1px solid #CC3333
+}
+
+#plista_picads_info_close {
+	color: #CC3333;
+	font-size: 11px;
+	border: 1px solid #CC3333;
+	padding: 4px;
+	margin: -20px 0 0 40px;
+	display: block;
+	float: right;
+	cursor: pointer;
+	font-weight: bold
+}

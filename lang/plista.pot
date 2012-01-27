@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-04 16:16+0100\n"
+"POT-Creation-Date: 2012-01-23 13:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,184 +17,198 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plista_integration_admin.php:133
+#: ../plista_integration_admin.php:137
 msgid "Options saved."
 msgstr ""
 
-#: ../plista_integration_admin.php:183
+#: ../plista_integration_admin.php:188
 msgid "Hint"
 msgstr ""
 
-#: ../plista_integration_admin.php:184
+#: ../plista_integration_admin.php:189
 #, php-format
 msgid "You have to register at %1$s first to get all necessary data."
 msgstr ""
 
-#: ../plista_integration_admin.php:185
+#: ../plista_integration_admin.php:190
 #, php-format
 msgid "Please pay attention to the %1$s"
 msgstr ""
 
-#: ../plista_integration_admin.php:189
+#: ../plista_integration_admin.php:194
 msgid "Basic settings"
 msgstr ""
 
-#: ../plista_integration_admin.php:191
+#: ../plista_integration_admin.php:196
 msgid "Widgetname"
 msgstr ""
 
-#: ../plista_integration_admin.php:191 ../plista_integration_admin.php:197
+#: ../plista_integration_admin.php:196 ../plista_integration_admin.php:202
 msgid "required"
 msgstr ""
 
-#: ../plista_integration_admin.php:193 ../plista_integration_admin.php:199
-#: ../plista_integration_admin.php:221 ../plista_integration_admin.php:265
-#: ../plista_integration_admin.php:271 ../plista_integration_admin.php:277
-#: ../plista_integration_admin.php:283 ../plista_integration_admin.php:289
-#: ../plista_integration_admin.php:295 ../plista_integration_admin.php:301
-#: ../plista_integration_admin.php:307 ../plista_integration_admin.php:313
-#: ../plista_integration_admin.php:319 ../plista_integration_admin.php:335
-#: ../plista_integration_admin.php:340 ../plista_integration_admin.php:345
-#: ../plista_integration_admin.php:350 ../plista_integration_admin.php:355
-#: ../plista_integration_admin.php:360 ../plista_integration_admin.php:365
-#: ../plista_integration_admin.php:370 ../plista_integration_admin.php:375
+#: ../plista_integration_admin.php:198 ../plista_integration_admin.php:204
+#: ../plista_integration_admin.php:226 ../plista_integration_admin.php:288
+#: ../plista_integration_admin.php:294 ../plista_integration_admin.php:300
+#: ../plista_integration_admin.php:306 ../plista_integration_admin.php:312
+#: ../plista_integration_admin.php:318 ../plista_integration_admin.php:324
+#: ../plista_integration_admin.php:330 ../plista_integration_admin.php:336
+#: ../plista_integration_admin.php:342 ../plista_integration_admin.php:358
+#: ../plista_integration_admin.php:363 ../plista_integration_admin.php:368
+#: ../plista_integration_admin.php:373 ../plista_integration_admin.php:378
+#: ../plista_integration_admin.php:383 ../plista_integration_admin.php:388
+#: ../plista_integration_admin.php:393 ../plista_integration_admin.php:398
 msgid "e.g."
 msgstr ""
 
-#: ../plista_integration_admin.php:197
+#: ../plista_integration_admin.php:202
 msgid "URL"
 msgstr ""
 
-#: ../plista_integration_admin.php:204
+#: ../plista_integration_admin.php:209
 msgid "Widget position"
 msgstr ""
 
-#: ../plista_integration_admin.php:205
+#: ../plista_integration_admin.php:210
 msgid "The widget will be shown automatically at the bottom of every article."
 msgstr ""
 
-#: ../plista_integration_admin.php:206
+#: ../plista_integration_admin.php:211
 msgid ""
 "Only check the option if you want to insert the widget on a different "
 "position like the sidebar."
 msgstr ""
 
-#: ../plista_integration_admin.php:207
+#: ../plista_integration_admin.php:212
 #, php-format
 msgid "Please read point 11. of the %1$s before activating self positioning"
 msgstr ""
 
-#: ../plista_integration_admin.php:210
+#: ../plista_integration_admin.php:215
 msgid "Yes, I would like to position the widget"
 msgstr ""
 
-#: ../plista_integration_admin.php:216 ../plista_integration_admin.php:219
+#: ../plista_integration_admin.php:221 ../plista_integration_admin.php:224
 msgid "Default image"
 msgstr ""
 
-#: ../plista_integration_admin.php:217
+#: ../plista_integration_admin.php:222
 msgid "Define a default image for articles without an image."
 msgstr ""
 
-#: ../plista_integration_admin.php:219 ../plista_integration_admin.php:381
+#: ../plista_integration_admin.php:224 ../plista_integration_admin.php:404
 msgid "optional"
 msgstr ""
 
-#: ../plista_integration_admin.php:226
+#: ../plista_integration_admin.php:231
 msgid "Exclude pages"
 msgstr ""
 
-#: ../plista_integration_admin.php:229
+#: ../plista_integration_admin.php:234
 msgid "Don't show the widget on some pages"
 msgstr ""
 
-#: ../plista_integration_admin.php:233 ../plista_integration_admin.php:402
+#: ../plista_integration_admin.php:238 ../plista_integration_admin.php:426
 msgid "Exclude the following pages"
 msgstr ""
 
-#: ../plista_integration_admin.php:235
+#: ../plista_integration_admin.php:240
 msgid ""
 "Insert the Page-Id's separated by comma (e.g.: 5, 235, 1340) where the "
 "widget should be excluded"
 msgstr ""
 
-#: ../plista_integration_admin.php:240 ../plista_integration_admin.php:389
+#: ../plista_integration_admin.php:245
+msgid "Exclude tags"
+msgstr ""
+
+#: ../plista_integration_admin.php:262 ../plista_integration_admin.php:413
 msgid "Exclude categories"
 msgstr ""
 
-#: ../plista_integration_admin.php:255
+#: ../plista_integration_admin.php:278
 msgid "plista widget design"
 msgstr ""
 
-#: ../plista_integration_admin.php:258
+#: ../plista_integration_admin.php:281
 msgid "I would like to change the widget design"
 msgstr ""
 
-#: ../plista_integration_admin.php:263 ../plista_integration_admin.php:333
+#: ../plista_integration_admin.php:286 ../plista_integration_admin.php:356
 msgid "Widgetheadline (font-size)"
 msgstr ""
 
-#: ../plista_integration_admin.php:269 ../plista_integration_admin.php:338
+#: ../plista_integration_admin.php:292 ../plista_integration_admin.php:361
 msgid "Widgetheadline (font-color)"
 msgstr ""
 
-#: ../plista_integration_admin.php:275 ../plista_integration_admin.php:343
+#: ../plista_integration_admin.php:298 ../plista_integration_admin.php:366
 msgid "Widgetheadline (background-color)"
 msgstr ""
 
-#: ../plista_integration_admin.php:281 ../plista_integration_admin.php:348
+#: ../plista_integration_admin.php:304 ../plista_integration_admin.php:371
 msgid "Images (width)"
 msgstr ""
 
-#: ../plista_integration_admin.php:287 ../plista_integration_admin.php:353
+#: ../plista_integration_admin.php:310 ../plista_integration_admin.php:376
 msgid "Images (max-height)"
 msgstr ""
 
-#: ../plista_integration_admin.php:293 ../plista_integration_admin.php:358
+#: ../plista_integration_admin.php:316 ../plista_integration_admin.php:381
 msgid "Article headline (font-color)"
 msgstr ""
 
-#: ../plista_integration_admin.php:299 ../plista_integration_admin.php:363
+#: ../plista_integration_admin.php:322 ../plista_integration_admin.php:386
 msgid "Article headline (font-size)"
 msgstr ""
 
-#: ../plista_integration_admin.php:305 ../plista_integration_admin.php:368
+#: ../plista_integration_admin.php:328 ../plista_integration_admin.php:391
 msgid "Text (font-color)"
 msgstr ""
 
-#: ../plista_integration_admin.php:311 ../plista_integration_admin.php:373
+#: ../plista_integration_admin.php:334 ../plista_integration_admin.php:396
 msgid "Text (font-size)"
 msgstr ""
 
-#: ../plista_integration_admin.php:317
+#: ../plista_integration_admin.php:340
 msgid "Mouseover (background-color)"
 msgstr ""
 
-#: ../plista_integration_admin.php:325
+#: ../plista_integration_admin.php:348
 msgid "plista widget mobile design for wptouch"
 msgstr ""
 
-#: ../plista_integration_admin.php:328
+#: ../plista_integration_admin.php:351
 msgid "I would like to change the mobile widget design"
 msgstr ""
 
-#: ../plista_integration_admin.php:382
+#: ../plista_integration_admin.php:405
+msgid ""
+"Did plista prepare pictureAds for this domain? Otherwise feel free to "
+"contact the Support-Team."
+msgstr ""
+
+#: ../plista_integration_admin.php:405
 #, php-format
 msgid ""
 "In order to use pictureAds the article images should at least have the size "
 "of 350px. For further information please contact %1$s"
 msgstr ""
 
-#: ../plista_integration_admin.php:386
+#: ../plista_integration_admin.php:405
+msgid "close"
+msgstr ""
+
+#: ../plista_integration_admin.php:409
 msgid "Activate plista pictureAds"
 msgstr ""
 
-#: ../plista_integration_admin.php:404
+#: ../plista_integration_admin.php:428
 msgid ""
 "Insert the Page-Id's separated by comma (e.g.: 2, 89, 520) where pictureAds "
 "should be excluded"
 msgstr ""
 
-#: ../plista_integration_admin.php:406
+#: ../plista_integration_admin.php:430
 msgid "For more information about finding the page id please visit"
 msgstr ""
