@@ -3,14 +3,14 @@
 	Plugin Name: plista
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
-	Version: 1.3.3
+	Version: 1.3.4
 	Author: msch (wordpress@plista.com)
 	Author URI: http://www.plista.com
 	***/
 
 class plista {
 
-	const VERSION = '1.3.3';
+	const VERSION = '1.3.4';
 
 	/**
 	 * combatibilitycheck 
@@ -256,7 +256,7 @@ class plista {
 		$tags = get_option( 'plista_tags' );
 		$tag_ID = array();
 		$post_tags = get_the_tags();
-		if (isset($post_tags)) {
+		if (isset($post_tags) && is_array($post_tags)) {
 			foreach($post_tags as $tag) {
 				array_push($tag_ID,$tag->term_id);
 			}
