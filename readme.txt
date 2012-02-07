@@ -5,7 +5,7 @@ Contributors: plista.com
 Text Domain: plista
 Requires at least: 2.5.0
 Tested up to: 3.3.1
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 
 The plista Widget adds plista RecommendationAds to your Wordpress blog posts.
 
@@ -61,7 +61,7 @@ Für weitere Fragen besuchen Sie bitte unser Wiki: wiki.plista.com
 
 == Upgrade Notice ==
 
-Please upgrade to Version 1.3.4
+Please upgrade to Version 1.3.5
 
 == Screenshots ==
 
@@ -107,4 +107,7 @@ Please upgrade to Version 1.3.4
 
 1.3.4 @ 01-30-2012
 	* fix warning if no tags are available
+
+1.3.5 @ 02-07-2012
+	* dont't look for youtube image if no youtube video is present
 

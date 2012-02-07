@@ -3,14 +3,14 @@
 	Plugin Name: plista
 	Plugin URI: http://www.plista.com
 	Description: Plugin for displaying plista RecommendationAds
-	Version: 1.3.4
+	Version: 1.3.5
 	Author: msch (wordpress@plista.com)
 	Author URI: http://www.plista.com
 	***/
 
 class plista {
 
-	const VERSION = '1.3.4';
+	const VERSION = '1.3.5';
 
 	/**
 	 * combatibilitycheck 
@@ -364,7 +364,7 @@ class plista {
 			}
 			if (!$imgsrc || is_null($imgsrc)) {
 				$imgsrc = self::get_first_plista_image();
-				if (!$imgsrc || is_null($imgsrc) && !empty($isyoutube)) {
+				if (!$imgsrc && !empty($isyoutube)) {
 					$imgsrc = self::get_youtube_img();
 				}
 			}
