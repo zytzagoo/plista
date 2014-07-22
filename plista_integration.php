@@ -124,19 +124,23 @@ class plista {
 		ob_end_clean();
 		$pattern = "/src=[\"']?([^\"']?.*(png|jpg|gif|jpeg))[\"']?/i";
 		$output = preg_match_all($pattern, $post->post_content, $matches);
-		$first_img = $matches [1] [0];
-		// always remove title and alt attributes containing something like title="bild.jpg"
-		$first_img = preg_replace(array('/[\"]+/', '/ (alt|title)=?.*(png|jpg|gif|jpeg)/'), array('', ''), $first_img);
-		
-		// add an extra check for img size cause sometimes they use ad pixels in the article
-		// ad pixels are normaly only 1px x 1px but too be sure set it to 20px x 20px
-		if ($first_img) {
-			list($width, $height, $type, $attr) = @getimagesize($first_img);
+		if (is_array($matches) && !empty($matches)) {
+			if (isset($matches[1][0]) && !empty($matches[1][0])) {
+				$first_img = $matches [1] [0];
+				// always remove title and alt attributes containing something like title="bild.jpg"
+				$first_img = preg_replace(array('/[\"]+/', '/ (alt|title)=?.*(png|jpg|gif|jpeg)/'), array('', ''), $first_img);
 
-			if (!is_null($height) && $height >= '20' && $height >= '20') {
-				return $first_img;
-			} else {
-				return $first_img;
+				// add an extra check for img size cause sometimes they use ad pixels in the article
+				// ad pixels are normaly only 1px x 1px but too be sure set it to 20px x 20px
+				if ($first_img) {
+					list($width, $height, $type, $attr) = @getimagesize($first_img);
+
+					if (!is_null($height) && $height >= '20' && $height >= '20') {
+						return $first_img;
+					} else {
+						return $first_img;
+					}
+				}
 			}
 		}
 		return '';
@@ -315,7 +319,7 @@ class plista {
 						PLISTA.partner.init();
 					</script>';
 				}
-			} 
+			}
 		}
 	}
 
@@ -340,14 +344,16 @@ class plista {
 		$id = get_the_id();
 		$youtubepattern = "/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/";
 		$isyoutube = preg_match($youtubepattern, $post->post_content);
-		
+
 		// first try to get the article thumbnail image
 		if ( function_exists('has_post_thumbnail') && has_post_thumbnail($id) ) {
 			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id));
-			$imgsrc = $thumbnail[0];
+			if (!empty($thumbnail)) {
+				$imgsrc = $thumbnail[0];
+			}
 		}
 		// if we couldn't find one, check for other images in the article
-		if (!$imgsrc || is_null($imgsrc)) {
+		if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
 			$attachments = get_children( array(
 				'post_parent'    => get_the_ID(),
 				'post_type'      => 'attachment',
@@ -362,7 +368,7 @@ class plista {
 				$thumbnail = wp_get_attachment_image_src( $attachment_id );
 				$imgsrc = $thumbnail[0];
 			}
-			if (!$imgsrc || is_null($imgsrc)) {
+			if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
 				$imgsrc = self::get_first_plista_image();
 				if (!$imgsrc && !empty($isyoutube)) {
 					$imgsrc = self::get_youtube_img();
@@ -372,7 +378,7 @@ class plista {
 
 		// still no image found so take the default img
 		if (!$imgsrc || is_null($imgsrc)) {
-				$imgsrc = strtolower($defaultimg);
+			$imgsrc = strtolower($defaultimg);
 		}
 
 		$content .= self::plista_content(array(
@@ -392,4 +398,3 @@ plista::init();
 function plista_integration() {
 	return plista::plista_integration(NULL);
 }
-?>
