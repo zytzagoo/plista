@@ -10,15 +10,15 @@
 
 class plista {
 
-	const VERSION = '1.3.6';
+	const VERSION = '1.3.6.1';
 
 	/**
-	 * combatibilitycheck 
+	 * combatibilitycheck
 	 * register admin menu and custom css
-	 * 
+	 *
 	 * @return void
 	 */
-	public function init() {
+	public static function init() {
 		global $wp_version;
 		$exit_msg_wp='plista requires WordPress 2.5 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
 		$exit_msg_php='plista requires php 5.2 or newer. Your are using PHP Version: '.PHP_VERSION.'. Please contact wordpress@plista.com if you get this message.';
@@ -53,7 +53,7 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function plista_admin() {
+	public static function plista_admin() {
 		include('plista_integration_admin.php');
 	}
 
@@ -62,7 +62,7 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function plista_version() {
+	public static function plista_version() {
 		return self::VERSION;
 	}
 
@@ -72,7 +72,7 @@ class plista {
 	*
 	* @return boolean
 	*/
-	public function plista_ismobile() {
+	public static function plista_ismobile() {
 		if (preg_match('/wptouch/', get_stylesheet_directory_uri())) {
 			return true;
 		} else {
@@ -86,8 +86,8 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function plista_admin_actions() {
-		if( current_user_can('level_10')) {
+	public static function plista_admin_actions() {
+		if ( current_user_can( 'manage_options' ) ) {
 			wp_enqueue_script( 'plista-admin', plugins_url('/js/plista-admin.js', __FILE__), array(), '1.3' );
 			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.3' );
 			add_options_page('plista', 'plista', 1, 'plista', array(__CLASS__, 'plista_admin'));
@@ -100,11 +100,11 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function get_youtube_img() {
+	public static function get_youtube_img() {
 		global $post, $posts;
 		$youtube_img = '';
-		ob_start();
-		ob_end_clean();
+		//ob_start();
+		//ob_end_clean();
 		$pattern = '/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/';
 		$output = preg_match_all($pattern, $post->post_content, $matches);
 		$youtubeid = $matches [2] [0];
@@ -117,11 +117,11 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function get_first_plista_image() {
+	public static function get_first_plista_image() {
 		global $post, $posts;
 		$first_img = '';
-		ob_start();
-		ob_end_clean();
+		//ob_start();
+		//ob_end_clean();
 		$pattern = "/src=[\"']?([^\"']?.*(png|jpg|gif|jpeg))[\"']?/i";
 		$output = preg_match_all($pattern, $post->post_content, $matches);
 		if (is_array($matches) && !empty($matches)) {
@@ -151,7 +151,7 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function head() {	
+	public static function head() {
 
 		// styles for mobile widget
 		$mobile_editcss = get_option( 'plista_mobile_editcss' );
@@ -248,11 +248,11 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function plista_content( $plista_data ) {
+	public static function plista_content( $plista_data ) {
 
-		$widgetname = get_option( 'plista_widgetname' );  
+		$widgetname = get_option( 'plista_widgetname' );
        	$jspath = get_option( 'plista_jspath' );
-		
+
 		$setpicads = get_option( 'plista_setpicads' );
 		$setblacklist = get_option( 'plista_setblacklist' );
 		$blacklistpicads = get_option( 'plista_blacklistpicads' );
@@ -328,7 +328,7 @@ class plista {
 	 *
 	 * @return array
 	 */
-	public function plista_integration ( $content ) {
+	public static function plista_integration ( $content ) {
 		global $post;
 		$text = get_the_content();
 		$bad = array(
