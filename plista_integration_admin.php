@@ -12,10 +12,10 @@ if($plistachange == 'P') {
 	update_option('plista_mobile_categories', $mobile_categories);
 
 	$widgetname = isset($_POST['plista_widgetname']) ? $_POST['plista_widgetname'] : '';
-	update_option('plista_widgetname', $widgetname); 
+	update_option('plista_widgetname', $widgetname);
 
-	$jspath = isset($_POST['plista_jspath']) ? $_POST['plista_jspath'] : '';  
-	update_option('plista_jspath', $jspath); 
+	$jspath = isset($_POST['plista_jspath']) ? $_POST['plista_jspath'] : '';
+	update_option('plista_jspath', $jspath);
 
 	$autoinsert = isset($_POST['plista_autoinsert']) ? $_POST['plista_autoinsert'] : '';
 	update_option('plista_autoinsert', $autoinsert);
@@ -26,9 +26,9 @@ if($plistachange == 'P') {
 			$autoinsert = '';
 	}
 
-	$defaultimg = isset($_POST['plista_defaultimg']) ? $_POST['plista_defaultimg'] : '';  
-	update_option('plista_defaultimg', $defaultimg); 
-	
+	$defaultimg = isset($_POST['plista_defaultimg']) ? $_POST['plista_defaultimg'] : '';
+	update_option('plista_defaultimg', $defaultimg);
+
 	$editcss = isset($_POST['plista_editcss']) ? $_POST['plista_editcss'] : '';
 	update_option('plista_editcss', $editcss);
 	if (get_option('plista_editcss')) {
@@ -133,7 +133,7 @@ if($plistachange == 'P') {
 	<div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
 <?php
 
-} else {  
+} else {
 	//Show choosen options
 	$widgetname = get_option('plista_widgetname');
 	$jspath = get_option('plista_jspath');
@@ -175,7 +175,7 @@ if($plistachange == 'P') {
 ?>
 
 <div class="wrap plistawrapper">
-	
+
 	<h2><img src="<?php echo WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) . '/image/logo.png'; ?>" alt="plista logo" /><span>Version <?php echo plista::plista_version(); ?></span></h2>
 
 	<form name="plista_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
@@ -201,7 +201,7 @@ if($plistachange == 'P') {
 			</p>
 		</div>
 
-		<div id="plistaposition" class="plistabox">	
+		<div id="plistaposition" class="plistabox">
 			<h3><?php _e('Widget position', 'plista'); ?></h3>
 			<p><?php _e('The widget will be shown automatically at the bottom of every article.', 'plista') ?></p>
 			<p><?php _e('Only check the option if you want to insert the widget on a different position like the sidebar.', 'plista'); ?>.</p>
@@ -209,11 +209,10 @@ if($plistachange == 'P') {
 			<p>
 				<input type="checkbox" id="plista_autoinsert" name="plista_autoinsert" value="1" <?php echo $autoinsert ?>/>
 				<label  for="plista_autoinsert"><?php _e('Yes, I would like to position the widget', 'plista'); ?></label>
-			
 			</p>
 		</div>
 
-		<div class="plistabox">	
+		<div class="plistabox">
 			<h3><?php _e('Default image', 'plista'); ?></h3>
 			<p><?php _e('Define a default image for articles without an image.', 'plista') ?></p>
 			<p>
@@ -223,8 +222,8 @@ if($plistachange == 'P') {
 			</p>
 		</div>
 
-		<div class="plistabox">	
-			<h3><?php _e('Exclude pages', 'plista'); ?></h3>	
+		<div class="plistabox">
+			<h3><?php _e('Exclude pages', 'plista'); ?></h3>
 			<p>
 				<input type="checkbox" id="plista_setblacklist" name="plista_setblacklist" value="1" <?php echo $setblacklist ?>/>
 				<label for="plista_setblacklist"><?php _e('Don\'t show the widget on some pages', 'plista'); ?></label>
@@ -241,7 +240,7 @@ if($plistachange == 'P') {
 			$wp_tags = get_tags(array('orderby' => 'count', 'order' => 'DESC'));
 			if ($wp_tags) {
 		?>
-		<div class="plistabox">	
+		<div class="plistabox">
 			<h3><?php _e('Exclude tags', 'plista'); ?></h3>
 			<ul class="plista-categories">
 			<?php
@@ -251,19 +250,19 @@ if($plistachange == 'P') {
 					<input type="checkbox" name="plista_tags[]" value="<?= $wp_tag->term_id; ?>" <?php if (is_array($tags) && in_array($wp_tag->term_id,$tags)) echo "checked"; ?>/>
 					<label for="plista_tags[]"><?= $wp_tag->name; ?></label>
 				</li>
-				
+
 		  	<?php } ?>
 			</ul>
 			<div class="plistaclear"></div>
 		</div>
 		<?php } ?>
 
-		<div class="plistabox">	
+		<div class="plistabox">
 			<h3><?php _e('Exclude categories', 'plista'); ?></h3>
 			<ul class="plista-categories">
-			<?php 
+			<?php
 			$wp_categories = get_categories(array('orderby' => 'count', 'order' => 'DESC'));
-			foreach ($wp_categories as $wp_category): 
+			foreach ($wp_categories as $wp_category):
 			?>
 				<li>
 					<input type="checkbox" name="plista_categories[]" value="<?= $wp_category->cat_ID; ?>" <?php if (is_array($categories) && in_array($wp_category->cat_ID,$categories)) echo "checked"; ?>/>
@@ -274,7 +273,7 @@ if($plistachange == 'P') {
 			<div class="plistaclear"></div>
 		</div>
 
-		<div class="plistabox" id="plistadesign">		
+		<div class="plistabox" id="plistadesign">
 			<h3 class="plistaclear"><?php _e('plista widget design', 'plista');?></h3>
 			<p>
 				<input type="checkbox" id="plista_editcss" name="plista_editcss" value="1" <?php echo $editcss ?>/>
@@ -366,7 +365,7 @@ if($plistachange == 'P') {
 					<label class="textlabel" for="plista_mobile_hlbgcolor"><?php _e('Widgetheadline (background-color)', 'plista'); ?></label>
 					<input type="text" name="plista_mobile_hlbgcolor" value="<?php echo $mobile_hlbgcolor; ?>" size="12">
 					<span><?php _e('e.g.', 'plista'); ?> #FFFFFF</span>
-				</p>		
+				</p>
 				<p>
 					<label class="textlabel" for="plista_mobile_imgsize"><?php _e('Images (width)', 'plista'); ?></label>
 					<input type="text" name="plista_mobile_imgsize" value="<?php echo $mobile_imgsize; ?>" size="12">
@@ -412,7 +411,7 @@ if($plistachange == 'P') {
 			<div id="ppicadsadditional">
 				<p><?php _e('Exclude categories', 'plista'); ?></p>
 				<ul class="plista-categories">
-				<?php 
+				<?php
 				$wp_categories = get_categories();
 				foreach ($wp_categories as $wp_category): ?>
 					<li>
