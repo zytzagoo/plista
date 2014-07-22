@@ -12,50 +12,58 @@ var plistaadmin = {
 			ppicadsadditional = document.getElementById('ppicadsadditional'),
 			ppicadsinfoclose = document.getElementById('plista_picads_info_close');
 
-		pdesign.className = pmdesign.className = 'plistahide';
+		if (pdesign) {
+			pdesign.className = pmdesign.className = 'plistahide';
+		}
+
 		if (ppicadsinfo) {
 			ppicadsinfo.className = ppicadsadditional.className = 'plistahide';
 		}
 
-		if (pcheckdesign.checked === true) {
-			pdesign.className = 'plistashow';
-		}
-
-		pcheckdesign.onclick = function () {
+		if (pcheckdesign) {
 			if (pcheckdesign.checked === true) {
 				pdesign.className = 'plistashow';
-			} else {
-				pdesign.className = 'plistahide';
 			}
-		};
-
-		if (pmcheckdesign.checked === true) {
-			pmdesign.className = 'plistashow';
+			pcheckdesign.onclick = function () {
+				if (pcheckdesign.checked === true) {
+					pdesign.className = 'plistashow';
+				} else {
+					pdesign.className = 'plistahide';
+				}
+			};
 		}
 
-		pmcheckdesign.onclick = function () {
+		if (pmcheckdesign) {
 			if (pmcheckdesign.checked === true) {
 				pmdesign.className = 'plistashow';
-			} else {
-				pmdesign.className = 'plistahide';
 			}
-		};
-
-		if (ppicads.checked === true) {
-			ppicadsadditional.className = 'plistashow';
+			pmcheckdesign.onclick = function () {
+				if (pmcheckdesign.checked === true) {
+					pmdesign.className = 'plistashow';
+				} else {
+					pmdesign.className = 'plistahide';
+				}
+			};
 		}
 
-		ppicads.onclick = function () {
+		if (ppicads) {
 			if (ppicads.checked === true) {
-				ppicadsinfo.className = ppicadsadditional.className = 'plistashow';
-			} else {
-				ppicadsinfo.className = ppicadsadditional.className = 'plistahide';
+				ppicadsadditional.className = 'plistashow';
 			}
-		};
+			ppicads.onclick = function () {
+				if (ppicads.checked === true) {
+					ppicadsinfo.className = ppicadsadditional.className = 'plistashow';
+				} else {
+					ppicadsinfo.className = ppicadsadditional.className = 'plistahide';
+				}
+			};
+		}
 
-		ppicadsinfoclose.onclick = function () {
-			ppicadsinfo.className = 'plistahide';
-		};
+		if (ppicadsinfoclose) {
+			ppicadsinfoclose.onclick = function () {
+				ppicadsinfo.className = 'plistahide';
+			};
+		}
 	}
 };
 

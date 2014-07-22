@@ -10,15 +10,15 @@
 
 class plista {
 
-	const VERSION = '1.3.6';
+	const VERSION = '1.3.6.1';
 
 	/**
-	 * combatibilitycheck 
+	 * combatibilitycheck
 	 * register admin menu and custom css
-	 * 
+	 *
 	 * @return void
 	 */
-	public function init() {
+	public static function init() {
 		global $wp_version;
 		$exit_msg_wp='plista requires WordPress 2.5 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
 		$exit_msg_php='plista requires php 5.2 or newer. Your are using PHP Version: '.PHP_VERSION.'. Please contact wordpress@plista.com if you get this message.';
@@ -53,7 +53,7 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function plista_admin() {
+	public static function plista_admin() {
 		include('plista_integration_admin.php');
 	}
 
@@ -62,7 +62,7 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function plista_version() {
+	public static function plista_version() {
 		return self::VERSION;
 	}
 
@@ -72,7 +72,7 @@ class plista {
 	*
 	* @return boolean
 	*/
-	public function plista_ismobile() {
+	public static function plista_ismobile() {
 		if (preg_match('/wptouch/', get_stylesheet_directory_uri())) {
 			return true;
 		} else {
@@ -86,8 +86,8 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function plista_admin_actions() {
-		if( current_user_can('level_10')) {
+	public static function plista_admin_actions() {
+		if ( current_user_can( 'manage_options' ) ) {
 			wp_enqueue_script( 'plista-admin', plugins_url('/js/plista-admin.js', __FILE__), array(), '1.3' );
 			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.3' );
 			add_options_page('plista', 'plista', 1, 'plista', array(__CLASS__, 'plista_admin'));
@@ -100,11 +100,11 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function get_youtube_img() {
+	public static function get_youtube_img() {
 		global $post, $posts;
 		$youtube_img = '';
-		ob_start();
-		ob_end_clean();
+		//ob_start();
+		//ob_end_clean();
 		$pattern = '/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/';
 		$output = preg_match_all($pattern, $post->post_content, $matches);
 		$youtubeid = $matches [2] [0];
@@ -117,26 +117,30 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function get_first_plista_image() {
+	public static function get_first_plista_image() {
 		global $post, $posts;
 		$first_img = '';
-		ob_start();
-		ob_end_clean();
+		//ob_start();
+		//ob_end_clean();
 		$pattern = "/src=[\"']?([^\"']?.*(png|jpg|gif|jpeg))[\"']?/i";
 		$output = preg_match_all($pattern, $post->post_content, $matches);
-		$first_img = $matches [1] [0];
-		// always remove title and alt attributes containing something like title="bild.jpg"
-		$first_img = preg_replace(array('/[\"]+/', '/ (alt|title)=?.*(png|jpg|gif|jpeg)/'), array('', ''), $first_img);
-		
-		// add an extra check for img size cause sometimes they use ad pixels in the article
-		// ad pixels are normaly only 1px x 1px but too be sure set it to 20px x 20px
-		if ($first_img) {
-			list($width, $height, $type, $attr) = @getimagesize($first_img);
+		if (is_array($matches) && !empty($matches)) {
+			if (isset($matches[1][0]) && !empty($matches[1][0])) {
+				$first_img = $matches [1] [0];
+				// always remove title and alt attributes containing something like title="bild.jpg"
+				$first_img = preg_replace(array('/[\"]+/', '/ (alt|title)=?.*(png|jpg|gif|jpeg)/'), array('', ''), $first_img);
 
-			if (!is_null($height) && $height >= '20' && $height >= '20') {
-				return $first_img;
-			} else {
-				return $first_img;
+				// add an extra check for img size cause sometimes they use ad pixels in the article
+				// ad pixels are normaly only 1px x 1px but too be sure set it to 20px x 20px
+				if ($first_img) {
+					list($width, $height, $type, $attr) = @getimagesize($first_img);
+
+					if (!is_null($height) && $height >= '20' && $height >= '20') {
+						return $first_img;
+					} else {
+						return $first_img;
+					}
+				}
 			}
 		}
 		return '';
@@ -147,7 +151,7 @@ class plista {
 	 *
 	 * @return void
 	 */
-	public function head() {	
+	public static function head() {
 
 		// styles for mobile widget
 		$mobile_editcss = get_option( 'plista_mobile_editcss' );
@@ -244,11 +248,11 @@ class plista {
 	 *
 	 * @return string
 	 */
-	public function plista_content( $plista_data ) {
+	public static function plista_content( $plista_data ) {
 
-		$widgetname = get_option( 'plista_widgetname' );  
+		$widgetname = get_option( 'plista_widgetname' );
        	$jspath = get_option( 'plista_jspath' );
-		
+
 		$setpicads = get_option( 'plista_setpicads' );
 		$setblacklist = get_option( 'plista_setblacklist' );
 		$blacklistpicads = get_option( 'plista_blacklistpicads' );
@@ -315,7 +319,7 @@ class plista {
 						PLISTA.partner.init();
 					</script>';
 				}
-			} 
+			}
 		}
 	}
 
@@ -324,7 +328,7 @@ class plista {
 	 *
 	 * @return array
 	 */
-	public function plista_integration ( $content ) {
+	public static function plista_integration ( $content ) {
 		global $post;
 		$text = get_the_content();
 		$bad = array(
@@ -340,14 +344,16 @@ class plista {
 		$id = get_the_id();
 		$youtubepattern = "/http:\/\/www\.youtube\.com\/(v|embed)\/([1-9|_|A-z]+)/";
 		$isyoutube = preg_match($youtubepattern, $post->post_content);
-		
+
 		// first try to get the article thumbnail image
 		if ( function_exists('has_post_thumbnail') && has_post_thumbnail($id) ) {
 			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($id));
-			$imgsrc = $thumbnail[0];
+			if (!empty($thumbnail)) {
+				$imgsrc = $thumbnail[0];
+			}
 		}
 		// if we couldn't find one, check for other images in the article
-		if (!$imgsrc || is_null($imgsrc)) {
+		if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
 			$attachments = get_children( array(
 				'post_parent'    => get_the_ID(),
 				'post_type'      => 'attachment',
@@ -362,7 +368,7 @@ class plista {
 				$thumbnail = wp_get_attachment_image_src( $attachment_id );
 				$imgsrc = $thumbnail[0];
 			}
-			if (!$imgsrc || is_null($imgsrc)) {
+			if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
 				$imgsrc = self::get_first_plista_image();
 				if (!$imgsrc && !empty($isyoutube)) {
 					$imgsrc = self::get_youtube_img();
@@ -372,7 +378,7 @@ class plista {
 
 		// still no image found so take the default img
 		if (!$imgsrc || is_null($imgsrc)) {
-				$imgsrc = strtolower($defaultimg);
+			$imgsrc = strtolower($defaultimg);
 		}
 
 		$content .= self::plista_content(array(
@@ -392,4 +398,3 @@ plista::init();
 function plista_integration() {
 	return plista::plista_integration(NULL);
 }
-?>
