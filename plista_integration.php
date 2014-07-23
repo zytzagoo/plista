@@ -117,6 +117,8 @@ class plista {
 	 *
 	 * @return string
 	 */
+	// zyt: this is completley broken for something like <img src="/wp-content/gallery/whatever.jpg">
+
 	public static function get_first_plista_image() {
 		global $post, $posts;
 		$first_img = '';
@@ -369,15 +371,20 @@ class plista {
 				$imgsrc = $thumbnail[0];
 			}
 			if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
+				/*
 				$imgsrc = self::get_first_plista_image();
 				if (!$imgsrc && !empty($isyoutube)) {
+					$imgsrc = self::get_youtube_img();
+				}
+				*/
+				if (!empty($isyoutube)) {
 					$imgsrc = self::get_youtube_img();
 				}
 			}
 		}
 
 		// still no image found so take the default img
-		if (!$imgsrc || is_null($imgsrc)) {
+		if (!isset($imgsrc) || !$imgsrc || is_null($imgsrc)) {
 			$imgsrc = strtolower($defaultimg);
 		}
 
