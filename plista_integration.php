@@ -90,7 +90,7 @@ class plista {
 		if ( current_user_can( 'manage_options' ) ) {
 			wp_enqueue_script( 'plista-admin', plugins_url('/js/plista-admin.js', __FILE__), array(), '1.3' );
 			wp_enqueue_style( 'plista-admin', plugins_url('/css/plista-admin.css', __FILE__), array(), '1.3' );
-			add_options_page('plista', 'plista', 1, 'plista', array(__CLASS__, 'plista_admin'));
+			add_options_page('plista', 'plista', 'manage_options', 'plista', array(__CLASS__, 'plista_admin'));
 		}
 
 	}
